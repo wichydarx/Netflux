@@ -1,0 +1,15 @@
+@import url("./home_not-logged.css");
+
+body {
+    color: #fff !important;
+}
+
+.nav-link {
+    color: #fff !important;
+}
+.nav-link:hover {
+  color: darkgrey !important;
+}
+.header {
+    flex-wrap: wrap !important;
+}
