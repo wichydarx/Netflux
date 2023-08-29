@@ -69,7 +69,7 @@ class RegisterType extends AbstractType
                     'label' => 'Prénom',
                     'attr' =>
                     [
-                        'placeholder' => 'Nom'
+                        'placeholder' => 'Prénom'
                     ]
                 ]
             )
@@ -77,6 +77,7 @@ class RegisterType extends AbstractType
                 'avatar',
                 FileType::class,
                 [
+                    'required' => false,
                     'label' => 'Avatar',
                 ]
             )
@@ -87,7 +88,7 @@ class RegisterType extends AbstractType
                     'label' => 'S\'inscrire',
                     'attr' =>
                     [
-                        'class' => 'btn btn-warning'
+                        'class' => 'btn-warning'
                     ]
                 ]
             );
