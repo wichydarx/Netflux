@@ -3,4 +3,91 @@
 {% block title %}Hello HomeController!
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	<div class="container d-flex justify-content-center align-items-center border-bottom">
+		<div class="row">
+			<div class="col-6 align-self-center">
+				<h1>Regardez sur votre TV</h1>
+				<p>Vous pouvez regarder Netflix sur votre TV, sur vos consoles de salon, votre Apple TV et même vos SmartBox Android</p>
+			</div>
+			<div class="col-6">
+				<img class="img-fluid" src="{{asset('assets/pictures/tv.png')}}">
+			</div>
+		</div>
+	</div>
+
+	<div class="container d-flex justify-content-center align-items-center border-bottom">
+		<div class="row">
+			<div class="col-6">
+				<img class="img-fluid" src="{{asset('assets/pictures/mobile.png')}}">
+			</div>
+			<div class="col-6 align-self-center">
+				<h1>Téléchargez vos séries préférées</h1>
+				<p>Sauvegardez vos contenus favoris même hors-ligne</p>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="container d-flex justify-content-center align-items-center border-bottom">
+		<div class="row">
+			<div class="col-6 align-self-center">
+				<h1>Regardez partout</h1>
+				<p>Regardez Netflix sur votre smartphone, tablette, Smart TV, ordinateur ou appareil de streaming, le tout pour un tarif mensuel fixe. Les contenus à regarder ne manquent pas !</p>
+			</div>
+			<div class="col-6">
+				<img class="img-fluid" src="{{asset('assets/pictures/device-pile.png')}}">
+			</div>
+		</div>
+
+	</div>
+	<div class="container mt-5">
+		<h1 class="text-center">Foire Aux Questions</h1>
+	</div>
+	<div class="container">
+		<div class="accordion mt-5" id="accordion">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="accordion-header">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+						Qu'est ce que Netflux ?
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+					<div class="accordion-body">
+						<strong>Tout votre contenu partout</strong>
+						Netflux, le géant du streaming, propose une vaste bibliothèque de films, séries et documentaires variés, offrant un divertissement sans fin pour tous les goûts et les intérêts.
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+						Une simple inscription
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+					<div class="accordion-body">
+						<strong>Netflux comment s'inscrire</strong>
+						Netflux est un service d'abonnement qui permet aux membres d'accéder à des séries TV et à des films en streaming sur Internet. Vous pouvez regarder Netflix sur votre ordinateur, sur des appareils mobiles et sur votre téléviseur via un appareil connecté à Internet (y compris les Smart TV, les décodeurs numériques, les lecteurs multimédias en streaming, les consoles de jeux, les lecteurs Blu-ray et les décodeurs).
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+						Une question supplémentaire ?
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+					<div class="accordion-body">
+						<strong>Contactez notre SAV</strong>
+						N'hésitez pas à nous écrire si vous avez des questions supplémentaires
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
