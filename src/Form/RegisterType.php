@@ -87,7 +87,7 @@ class RegisterType extends AbstractType
                     'label' => 'S\'inscrire',
                     'attr' =>
                     [
-                        'class' => 'btn btn-primary'
+                        'class' => 'btn btn-warning'
                     ]
                 ]
             );
