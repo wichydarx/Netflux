@@ -4,6 +4,11 @@
 {% endblock %}
 
 {% block body %}
+	{% for label,message in app.flashes %}
+		<div class="alert alert-{{label}}">
+			{{message[0]}}
+		</div>
+	{% endfor %}
 	<div class="container w-25">
 		{{form(registerForm)}}
 		</div>
