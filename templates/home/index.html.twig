@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello HomeController!
+
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	{% if not app.user %}
+		{% include "components/_homeNotLogged.html.twig" %}
+	{% endif %}
+
+{% endblock %}

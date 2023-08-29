@@ -1,21 +1,43 @@
-<div class="container-fluid">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
-      <div class="col-md-3 mb-2 mb-md-0">
-        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-          <img src="{{asset('assets/pictures/NETFLUX_64.png')}}" class="bi">
-        </a>
-      </div>
-
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-white">Accueil</a></li>
-        <li><a href="#" class="nav-link px-2 link-white">Séries</a></li>
-        <li><a href="#" class="nav-link px-2 link-white">Films</a></li>
-        <li><a href="#" class="nav-link px-2 link-white">Ma liste</a></li>
-      </ul>
-
-      <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-warning me-2">Se connecter</button>
-        <button type="button" class="btn btn-warning">S'inscrire</button>
-      </div>
-    </header>
-  </div>
+<div class="container-fluid bg-dark">
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+		<div class="col-md-3 mb-2 mb-md-0">
+			<a href="{{path('app_home')}}" class="d-inline-flex link-body-emphasis text-decoration-none">
+				<img src="{{asset('assets/pictures/NETFLUX_64.png')}}" class="bi">
+			</a>
+		</div>
+		{% if not app.user %}
+			<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+				<li>
+					<a href="#" class="nav-link px-2 link-white">Accueil</a>
+				</li>
+				<li>
+					<a href="#" class="nav-link px-2 link-white">Séries</a>
+				</li>
+				<li>
+					<a href="#" class="nav-link px-2 link-white">Films</a>
+				</li>
+				<li>
+					<a href="#" class="nav-link px-2 link-white">Ma liste</a>
+				</li>
+			</ul>
+			<div class="col-md-3 text-end">
+				<a href="{{path('app_login')}}" class="btn btn-outline-warning me-2">Se connecter</a>
+			</div>
+		{% else %}
+			<div class="btn-group">
+				<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fa-solid fa-user"></i>
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a class="dropdown-item" href="#">Profil</a>
+					</li>
+					<li><hr class="dropdown-divider"></li>
+					<li>
+						<a class="dropdown-item" href="{{path('app_logout')}}">Deconnexion</a>
+					</li>
+				</ul>
+			</div>
+		{% endif %}
+	</header>
+</div>
