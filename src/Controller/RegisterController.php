@@ -52,7 +52,7 @@ class RegisterController extends AbstractController
                 $this->manager->persist($user);
                 $this->manager->flush();
             } catch (\Throwable $th) {
-                $this->addFlash('danger', 'Une erreur est survenue lors de l\'ajout de la recette');
+                $this->addFlash('danger', 'Une erreur est survenue lors de l\'inscription');
             }
         }
         return $this->render('register/index.html.twig', [
