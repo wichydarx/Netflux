@@ -1,21 +1,21 @@
-<header>
-	<div class="netflixLogo">
-		<a id="logo" href="{{path('app_home')}}"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image"></a>
-	</div>
-	<nav class="main-nav">
-		<a href="{{path('app_home')}}">Accueil</a>
-		<a href="#tvShows">Séries TV</a>
-		<a href="#movies">Films</a>
-		<a href="#">Ajouté récemment</a>
-		<a href="#originals">Ma liste</a>
-	</nav>
-	<nav class="sub-nav">
-		<a href="#">
-			<i class="fas fa-search sub-nav-logo"></i>
-		</a>
-		<a href="#">
-			<i class="fas fa-bell sub-nav-logo"></i>
-		</a>
-		<a href="#">Account</a>
-	</nav>
-</header>
+<div class="container-fluid">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <img src="{{asset('assets/pictures/NETFLUX_64.png')}}" class="bi">
+        </a>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-white">Accueil</a></li>
+        <li><a href="#" class="nav-link px-2 link-white">Séries</a></li>
+        <li><a href="#" class="nav-link px-2 link-white">Films</a></li>
+        <li><a href="#" class="nav-link px-2 link-white">Ma liste</a></li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-warning me-2">Se connecter</button>
+        <button type="button" class="btn btn-warning">S'inscrire</button>
+      </div>
+    </header>
+  </div>
