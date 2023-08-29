@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RegisterController!
+{% endblock %}
+
+{% block body %}
+	{% for label,message in app.flashes %}
+		<div class="alert alert-{{label}}">
+			{{message[0]}}
+		</div>
+	{% endfor %}
+	<div class="container w-25">
+		{{ form_start(registerForm) }}
+		{{form_row(registerForm.email)}}
+		{{form_row(registerForm.password)}}
+		{{form_row(registerForm.lastname)}}
+		{{form_row(registerForm.firstname)}}
+		{{form_row(registerForm.avatar)}}
+		<div class="container d-flex justify-content-center mt-4">
+			{{form_row(registerForm.submit)}}
+		</div>
+		{{ form_end(registerForm) }}
+	</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+label {
+    color: white !important;
+}
+
+button[type=submit] {
+font-weight: 600;
+}
