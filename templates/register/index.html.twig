@@ -10,6 +10,15 @@
 		</div>
 	{% endfor %}
 	<div class="container w-25">
-		{{form(registerForm)}}
+		{{ form_start(registerForm) }}
+		{{form_row(registerForm.email)}}
+		{{form_row(registerForm.password)}}
+		{{form_row(registerForm.lastname)}}
+		{{form_row(registerForm.firstname)}}
+		{{form_row(registerForm.avatar)}}
+		<div class="container d-flex justify-content-center mt-4">
+			{{form_row(registerForm.submit)}}
 		</div>
-	{% endblock %}
+		{{ form_end(registerForm) }}
+	</div>
+{% endblock %}
