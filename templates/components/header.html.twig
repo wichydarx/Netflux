@@ -1,5 +1,6 @@
 <div class="container-fluid">
-	<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+	<header class="d-flex flex-wrap align-items-center {{app.user ? "" : " flex-column"}} justify-content-center justify-content-md-between py-3 mb-4">
+
 		<div class="col-md-3 mb-2 mb-md-0">
 			<a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
 				<img src="{{asset('assets/pictures/NETFLUX_64.png')}}" class="bi">
@@ -27,8 +28,8 @@
 			</ul>
 
 			<div class="btn-group mx-2">
-				<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">	
-			<i class="fa-solid fa-user"></i>
+				<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fa-solid fa-user"></i>
 				</button>
 				<ul class="dropdown-menu dropdown-menu-dark">
 					<li>
