@@ -91,7 +91,7 @@ class SecurityController extends AbstractController
         EntityManagerInterface $entityManager,
     )
     {
-        $user = $userRepository->findOneBy($token);
+        $user = $userRepository->findOneBy(['token' => $token]);
 
         if ($user) {
             $form = $this->createForm(ResetPasswordType::class);
@@ -99,12 +99,11 @@ class SecurityController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                // On efface le token
                 $user->setToken('');
                 $user->setPassword(
                     $this->passwordHasher->hashPassword(
                         $user,
-                        $form->get('password')->getData()
+                        $form->getData()['password']
                     )
                 );
                 $entityManager->persist($user);

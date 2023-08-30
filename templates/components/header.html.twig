@@ -6,50 +6,53 @@
 			</a>
 		</div>
 
+		{% if app.user %}
 
-		<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-			<li>
-				<a href="#" class="nav-link px-2 text-light">Accueil</a>
-			</li>
-			<li>
-				<a href="#" class="nav-link px-2 text-light">Séries</a>
-			</li>
-
-			<li>
-				<a href="#" class="nav-link px-2 text-light">Films</a>
-
-			</li>
-			<li>
-				<a href="#" class="nav-link px-2 text-light">Ma liste</a>
-
-			</li>
-		</ul>
-
-		<div class="btn-group mx-2">
-			<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-				Action
-			</button>
-			<ul class="dropdown-menu bg-black">
+			<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 				<li>
-					<a class="dropdown-item text-light" href="#">Profil</a>
+					<a href="#" class="nav-link px-2 text-light">Accueil</a>
+				</li>
+				<li>
+					<a href="#" class="nav-link px-2 text-light">Séries</a>
+				</li>
+
+				<li>
+					<a href="#" class="nav-link px-2 text-light">Films</a>
 
 				</li>
 				<li>
-					<a class="dropdown-item text-light" href="#">Paramettre</a>
-
-				</li>
-				<li><hr class="dropdown-divider"></li>
-				<li>
-					<a class="dropdown-item text-light" '{{path('app_logout')}}'>se deconnecter</a>
-
+					<a href="#" class="nav-link px-2 text-light">Ma liste</a>
 
 				</li>
 			</ul>
-		</div>
+
+			<div class="btn-group mx-2">
+				<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">	
+			<i class="fa-solid fa-user"></i>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-dark">
+					<li>
+						<a class="dropdown-item " href="#">Profil</a>
+
+					</li>
+					<li>
+						<a class="dropdown-item " href="#">Paramettre</a>
+
+					</li>
+					<li><hr class="dropdown-divider"></li>
+					<li>
+						<a class="dropdown-item " '{{path('app_logout')}}'>se deconnecter</a>
 
 
-		<div class="col-md-3 text-end ">
-			<a href='{{path('app_login')}}' class="btn btn-warning">Se connecter</a>
-		</div>
+					</li>
+				</ul>
+			</div>
+
+		{% else %}
+
+			<div class="col-md-3 text-end ">
+				<a href='{{path('app_login')}}' class="btn btn-warning">Se connecter</a>
+			</div>
+		{% endif %}
 	</header>
 </div>
