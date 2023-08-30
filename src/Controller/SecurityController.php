@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Service\MailJet;
+use App\Form\ResetPasswordType;
+use App\Repository\UserRepository;
 use App\Form\ResetPasswordRequestType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,8 +84,42 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/reset_password/{token}', name: 'app_reset_password')]
-    public function resetPassword()
+    public function resetPassword(
+        string $token,
+        Request $request,
+        UserRepository $userRepository,
+        EntityManagerInterface $entityManager,
+    )
     {
+        $user = $userRepository->findOneBy($token);
+
+        if ($user) {
+            $form = $this->createForm(ResetPasswordType::class);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                // On efface le token
+                $user->setToken('');
+                $user->setPassword(
+                    $this->passwordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Mot de passe changé avec succès');
+                return $this->redirectToRoute('app_login');
+            }
+
+            return $this->render('security/reset_password.html.twig', [
+                'form' => $form->createView()
+            ]);
+        }
+        $this->addFlash('danger', 'Jeton invalide');
+        return $this->redirectToRoute('app_login');
         return $this->render('security/reset_password.html.twig');
     }
 }
