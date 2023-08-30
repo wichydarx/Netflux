@@ -1,24 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RegisterController!
+{% block title %}Inscription | Netflux
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style></style>
 {% endblock %}
 
 {% block body %}
-	{% for label,message in app.flashes %}
-		<div class="alert alert-{{label}}">
-			{{message[0]}}
+	<div class="form-container-r">
+		<div class="background-image"></div>
+		<div class="form-wrapper-r">
+			<h1 class="h3 font-weight-normal">Inscription</h1>
+			{{ form_start(registerForm) }}
+			{{ form_row(registerForm.email) }}
+			{{ form_row(registerForm.password) }}
+			{{ form_row(registerForm.lastname) }}
+			{{ form_row(registerForm.firstname) }}
+			{{ form_row(registerForm.avatar) }}
+			<div class="d-grid gap-2">
+				{{ form_widget(registerForm.submit, { 'attr': {'class': 'btn btn-warning mt-3'} }) }}
+			</div>
+			{{ form_end(registerForm) }}
 		</div>
-	{% endfor %}
-	<div class="container w-25">
-		{{ form_start(registerForm) }}
-		{{form_row(registerForm.email)}}
-		{{form_row(registerForm.password)}}
-		{{form_row(registerForm.lastname)}}
-		{{form_row(registerForm.firstname)}}
-		{{form_row(registerForm.avatar)}}
-		<div class="container d-flex justify-content-center mt-4">
-			{{form_row(registerForm.submit)}}
-		</div>
-		{{ form_end(registerForm) }}
 	</div>
 {% endblock %}
