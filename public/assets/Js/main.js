@@ -8,7 +8,7 @@ let currentIndex = 0;
 function showSlide(index) {
   const items = carousel.querySelectorAll(".items");
   items.forEach((item, i) => {
-    item.style.display = i >= index && i < index + 5 ? "block" : "none";
+    item.style.display = i >= index && i < index + 4 ? "block" : "none";
   });
 }
 

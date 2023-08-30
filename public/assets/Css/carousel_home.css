@@ -14,24 +14,25 @@
 
 }
 
+.carouselBtn {
+  display: flex;
+  justify-content: space-between;
+}
+
 .prev-button {
   position: relative;
-  bottom: 150px
+  bottom: 150px;
+  left: 25px;
+  background-color: #4caf4f00;
+  border: none;
+  color: white;
 }
 
 .next-button {
-  position: absolute;
+  position: relative;
+  bottom: 150px;
+  right: 25px;
+  background-color: #4caf4f00;
+  border: none;
+  color: white;
 }
-
-
-
-
-/* {% for video in videos %}
-						{% if video.genre.name == "Comédie" %}
-							<div class="items">
-								<div>
-									<img src="{{asset('uploads/avatar/FU7ZCyrX0AQK-U-64eef316e1546.jpg')}}" alt="">
-								</div>
-							</div>
-						{% endif %}
-					{% endfor %} */

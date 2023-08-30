@@ -9,41 +9,27 @@
 	{% if app.user %}
 		<div class="carouselContainer">
 			<div class="carouselSlider">
+				<h2>Comédie</h2>
 				<div class="carouselItems">
-					<div class="items">
-						<div>
-							<img src="{{asset('uploads/avatar/FU7ZCyrX0AQK-U-64eef316e1546.jpg')}}" alt="">
-						</div>
-					</div>
-					<div class="items">
-						<div>
-							<img src="{{asset('assets/pictures/NETFLUX_VF.png')}}" alt="">
-						</div>
-					</div>
-					<div class="items">
-						<div>
-							<img src="{{asset('uploads/avatar/FU7ZCyrX0AQK-U-64eef316e1546.jpg')}}" alt="">
-						</div>
-					</div>
-					<div class="items">
-						<div>
-							<img src="{{asset('uploads/avatar/FU7ZCyrX0AQK-U-64eef316e1546.jpg')}}" alt="">
-						</div>
-					</div>
-					<div class="items">
-						<div>
-							<img src="{{asset('uploads/avatar/FU7ZCyrX0AQK-U-64eef316e1546.jpg')}}" alt="">
-						</div>
-					</div>
-					<div class="items">
-						<div>
-							<img src="{{asset('assets/pictures/NETFLUX_VF.png')}}" alt="">
-						</div>
-					</div>
+					{% for video in videos %}
+						{% if video.genre.name == "Comédie" %}
+							<div class="items">
+								<div>
+									<img src="{{asset('uploads/avatar/FU7ZCyrX0AQK-U-64eef316e1546.jpg')}}" alt="">
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
 				</div>
 			</div>
-			<button class="prev-button"></button>
-			<button class="next-button">Suivant</button>
+			<div class="carouselBtn">
+				<button class="prev-button">
+					<i class="fa-solid fa-arrow-left fa-2xl"></i>
+				</button>
+				<button class="next-button">
+					<i class="fa-solid fa-arrow-right fa-2xl"></i>
+				</button>
+			</div>
 		</div>
 	{% else %}
 		{% include "components/_homeNotLogged.html.twig" %}
