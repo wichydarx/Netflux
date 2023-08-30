@@ -1,0 +1,37 @@
+.carouselItems {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: transform 0.5s ease-in-out;
+}
+
+.items div img {
+  width: 300px;
+}
+
+.carouselItems {
+  display: flex;
+
+}
+
+.prev-button {
+  position: relative;
+  bottom: 150px
+}
+
+.next-button {
+  position: absolute;
+}
+
+
+
+
+/* {% for video in videos %}
+						{% if video.genre.name == "Comédie" %}
+							<div class="items">
+								<div>
+									<img src="{{asset('uploads/avatar/FU7ZCyrX0AQK-U-64eef316e1546.jpg')}}" alt="">
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %} */
