@@ -1,0 +1,38 @@
+.carouselItems {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: transform 0.5s ease-in-out;
+}
+
+.items div img {
+  width: 300px;
+}
+
+.carouselItems {
+  display: flex;
+
+}
+
+.carouselBtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.prev-button {
+  position: relative;
+  bottom: 150px;
+  left: 25px;
+  background-color: #4caf4f00;
+  border: none;
+  color: white;
+}
+
+.next-button {
+  position: relative;
+  bottom: 150px;
+  right: 25px;
+  background-color: #4caf4f00;
+  border: none;
+  color: white;
+}
