@@ -50,7 +50,8 @@
 		<div class="background-image"></div>
 		<div class="form-container">
 			{% for label,message in app.flashes %}
-				<div class="alert alert-{{ label }}">
+				<div class="alert alert-{{ label }} alert-dismissible fade show">
+
 					{{ message[0] }}
 				</div>
 			{% endfor %}
