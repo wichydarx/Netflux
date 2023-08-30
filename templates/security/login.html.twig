@@ -12,6 +12,11 @@
 	<div class="form-wrapper">
 		<div class="background-image"></div>
 		<div class="form-container">
+			{% for label,message in app.flashes %}
+				<div class="alert alert-{{ label }}">
+					{{ message[0] }}
+				</div>
+			{% endfor %}
 			<h1 class="h3 font-weight-normal">S'identifier</h1>
 			<form method="post">
 				{% if error %}
