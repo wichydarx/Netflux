@@ -51,6 +51,8 @@ class RegisterController extends AbstractController
                 // Ajout des informations de l'entité User dans la base de données
                 $this->manager->persist($user);
                 $this->manager->flush();
+                return $this->redirectToRoute('app_login');
+                $this->addFlash('success', 'Votre inscription a été validée avec succès. Vous pouvez maintenant vous connecter à votre compte.');
             } catch (\Throwable $th) {
                 $this->addFlash('danger', 'Une erreur est survenue lors de l\'inscription');
             }
