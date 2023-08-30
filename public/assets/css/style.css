@@ -7,18 +7,3 @@ body {
   background-color: black !important;
   color: white !important;
 }
-
-#accordion-header {
-  background-color: darkgrey !important;
-  color: black !important;
-}
-.accordion-item .accordion-header {
-  background-color: darkgrey !important;
-  color: black !important;
-}
-.accordion-body {
-  background-color: white !important;
-  color: black !important;
-}
-
-
