@@ -33,7 +33,7 @@ class VideoCrudController extends AbstractCrudController
                 'Série' => 'serie',
             ]),
             ImageField::new('thumbnail')
-                ->SetBasePath('uploads/thumbnail') // destination du fichier image
+                ->SetBasePath('uploads/') // destination du fichier image
                 ->setUploadDir('public/uploads/') // destination final du fichier image
                 ->setUploadedFileNamePattern('[randomhash].[extension]') //selection de l extention du fichier ET GENERATION D'UNE CHAINE DE CARACTERE
                 ->setRequired(false),
