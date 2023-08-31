@@ -59,8 +59,8 @@ class VideoCrudController extends AbstractCrudController
                 ->setUnlockConfirmationMessage('Attention, si vous modifiez le slug, l\'url de la page
             contenant ce film ou cette episode  va changer !'),
             ImageField::new('thumbnail')
-                ->SetBasePath('uploads/') // destination du fichier image
-                ->setUploadDir('public/uploads/') // destination final du fichier image
+                ->SetBasePath('uploads/thumbnail/') // destination du fichier image
+                ->setUploadDir('public/uploads/thumbnail/') // destination final du fichier image
                 ->setUploadedFileNamePattern('[randomhash].[extension]') //selection de l extention du fichier ET GENERATION D'UNE CHAINE DE CARACTERE
                 ->setRequired(false),
             IntegerField::new('duration'),
