@@ -56,8 +56,7 @@ class VideoCrudController extends AbstractCrudController
             ]),
             SlugField::new('slug')->setTargetFieldName('title')
                 ->hideOnIndex()
-                ->setUnlockConfirmationMessage('Attention, si vous modifiez le slug, l\'url de la page
-            contenant ce film ou cette episode  va changer !'),
+                ->setUnlockConfirmationMessage("Etes vous sur de vouloir changer le slug ?"),
             ImageField::new('thumbnail')
                 ->SetBasePath('uploads/thumbnail/') // destination du fichier image
                 ->setUploadDir('public/uploads/thumbnail/') // destination final du fichier image
@@ -73,7 +72,7 @@ class VideoCrudController extends AbstractCrudController
         ];
     }
 
-    private function duplicate(
+    public function duplicate(
         AdminContext $context,
         EntityManagerInterface $em,
         AdminUrlGenerator $adminUrlGenerator
@@ -81,6 +80,8 @@ class VideoCrudController extends AbstractCrudController
         /** @var Video $video */
         $video = $context->getEntity()->getInstance();
         $duplicatedVideo = clone $video;
+        $duplicatedVideo->setTitle($video->getTitle() . ' (copy)');
+        $duplicatedVideo->setSlug($video->getSlug() . '-' . uuid_create(UUID_TYPE_RANDOM));
         parent::persistEntity($em, $duplicatedVideo);
         $url = $adminUrlGenerator
             ->setController(self::class)
