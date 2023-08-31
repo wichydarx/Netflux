@@ -1,41 +1,84 @@
-class Carousel {
-  constructor(element) {
-    // Retrieve every elements needed by the carousel (arrows, dots, ...)
-    this.content = element.querySelector(".carouselItems");
-    this.arrowLeft = element.querySelector(".prev-button");
-    this.arrowRight = element.querySelector(".next-button");
-    this.activeElement = 0;
+const sliderContent = document.querySelector(".slider-content");
+const contentArray = sliderContent.children;
+var isTouched = false;
+
+var next = function () {
+  sliderContent.classList.add("next-animation");
+  if (isTouched) {
+    sliderContent.style.transform = "translate3d(-200%, 0px, 0px)";
+    sliderContent.addEventListener("transitionend", nextTouched, false);
+  } else if (!isTouched) {
+    sliderContent.style.transform = "translate3d(-100%, 0px, 0px)";
+
+    sliderContent.addEventListener("transitionend", afterAnimation, false);
+  }
+};
+
+var prev = function () {
+  if (isTouched) {
+    var content = Array.from(contentArray);
+    var getSplice = content.splice(contentArray.length - 3);
+    var newArr = getSplice.concat(content);
+
+    var i;
+    for (i = 0; i < content.length; i++) {
+      content[i].classList.remove("is-active");
+    }
+
+    var j;
+    for (j = 3; j < newArr.length && j < 6; j++) {
+      newArr[j].classList.add("is-active");
+    }
+
+    var len;
+    for (len = contentArray.length - 1; len >= 0; --len) {
+      sliderContent.insertBefore(newArr[len], sliderContent.firstChild);
+    }
+
+    sliderContent.style.transform = "translate3d(-200%, 0px, 0px)";
+
+    setTimeout(function () {
+      sliderContent.classList.add("next-animation");
+      sliderContent.style.transform = "translate3d(-100%, 0px, 0px)";
+      sliderContent.addEventListener("transitionend", afterAnimation, false);
+    });
+  }
+};
+
+var afterAnimation = function () {
+  sliderContent.classList.remove("next-animation");
+
+  if (!isTouched) {
+    var icon = document.createElement("i");
+    icon.classList.add("fa", "fa-chevron-left");
+    document.querySelector(".prev").appendChild(icon);
+    isTouched = true;
   }
 
-  // This function will make the element at index n visible in the carousel
-  activateElement(n) {
-    this.activeElement = n;
-    this.content.scrollTo(
-      this.content.children[n].offsetLeft - this.content.offsetLeft,
-      0
-    );
+  sliderContent.removeEventListener("transitionend", afterAnimation);
+};
+
+var nextTouched = function () {
+  var content = Array.from(contentArray);
+  var getSplice = content.splice(0, 3);
+  var newArr = content.concat(getSplice);
+
+  var i;
+  for (i = 0; i < content.length; i++) {
+    content[i].classList.remove("is-active");
   }
 
-  // This function will register and required event listeners
-  addEventListeners() {
-    // To handle the click on the dots
-    this.arrowLeft.addEventListener("click", () =>
-      this.activateElement(
-        (this.activeElement === 0
-          ? this.content.children.length
-          : this.activeElement) - 1
-      )
-    ); // If we are on the first element and we go left, then we activate the last one
-    this.arrowRight.addEventListener("click", () =>
-      this.activateElement(
-        this.activeElement === this.content.children.length - 1
-          ? 0
-          : this.activeElement + 1
-      )
-    ); // If we are on the last element and we go right, then we activate the first one
+  var j;
+  for (j = 3; j < newArr.length && j < 6; j++) {
+    newArr[j].classList.add("is-active");
   }
-}
 
-// Initialize the carousel for every HTML element with class "carousel"
-const carousels = document.getElementsByClassName("carouselContainer");
-for (const carousel of carousels) new Carousel(carousel).addEventListeners();
+  var len;
+  for (len = contentArray.length - 1; len >= 0; --len) {
+    sliderContent.insertBefore(newArr[len], sliderContent.firstChild);
+  }
+
+  sliderContent.classList.remove("next-animation");
+  sliderContent.style.transform = "translate3d(-100%, 0px, 0px)";
+  sliderContent.removeEventListener("transitionend", nextTouched);
+};
