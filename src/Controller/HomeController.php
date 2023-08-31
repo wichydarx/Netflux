@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Genre;
 use App\Entity\Video;
+use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,5 +32,12 @@ class HomeController extends AbstractController
             'videos' => $videos,
             'genres' => $genres
         ]);
+    }
+  
+    #[Route('/api/videos', name: 'app_movie')]
+    public function test(VideoRepository $videoRepository)
+    {
+
+        return $this->json($videoRepository->findAll(), 200, [], []);
     }
 }

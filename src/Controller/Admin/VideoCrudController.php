@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -27,13 +27,13 @@ class VideoCrudController extends AbstractCrudController
 
         return [
             TextField::new('title'),
-            TextEditorField::new('description'),
+            TextareaField::new('description'),
             ChoiceField::new('category')->setChoices([
                 'Film' => 'film',
                 'Série' => 'serie',
             ]),
             ImageField::new('thumbnail')
-                ->SetBasePath('uploads/thumbnail') // destination du fichier image
+                ->SetBasePath('uploads/') // destination du fichier image
                 ->setUploadDir('public/uploads/') // destination final du fichier image
                 ->setUploadedFileNamePattern('[randomhash].[extension]') //selection de l extention du fichier ET GENERATION D'UNE CHAINE DE CARACTERE
                 ->setRequired(false),
