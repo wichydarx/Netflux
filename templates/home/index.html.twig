@@ -6,30 +6,28 @@
 
 {% block body %}
 	{% if app.user %}
-		{% for genre in genres %}
-			<div class="carousel-container">
+		<section>
+			{% for genre in genres %}
 				<div class="title">
 					<h2>{{ genre.name }}</h2>
 				</div>
-				<div class="prev"></div>
-				<div class="carousel-list">
-					<ul class="slider-content">
-						{% for video in genre.videos %}
-							<li>
-								<div>
-									{{ video.title }}
-									<br>
-									{{video.category}}
-								</div>
-							</li>
-						{% endfor %}
-					</ul>
-					<div class="next">
-						<i class="fa fa-chevron-right" aria-hidden="true"></i>
+				<div class="carouselSlider">
+					<div class="carouselContainer">
+						<ul>
+							{% for video in genre.videos %}
+								<a href="">
+									<li>
+										<img src="pa" alt="">
+										<p>{{video.title}}</p>
+										<p>{{video.category}}</p>
+									</li>
+								</a>
+							{% endfor %}
+						</ul>
 					</div>
 				</div>
-			</div>
-		{% endfor %}
+			{% endfor %}
+		</section>
 	{% else %}
 		{% include "components/_homeNotLogged.html.twig" %}
 	{% endif %}
