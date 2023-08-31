@@ -17,7 +17,7 @@
 							{% for video in genre.videos %}
 								<a href="">
 									<li>
-										<img src="pa" alt="">
+										<img src="{{asset('uploads/thumbnail/' ~ video.thumbnail)}}" alt="">
 										<p>{{video.title}}</p>
 										<p>{{video.category}}</p>
 									</li>
