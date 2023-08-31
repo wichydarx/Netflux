@@ -3,12 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Video;
+use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Serializer;
 
 class HomeController extends AbstractController
 {
@@ -32,11 +31,10 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/movie', name: 'app_movie')]
-    public function test(Serializer $serializer)
+    #[Route('/api/videos', name: 'app_movie')]
+    public function test(VideoRepository $videoRepository)
     {
-        $videos = $this->manager->getRepository(Video::class)->findAll();
 
-        return JsonResponse(json($videos));
+        return $this->json($videoRepository->findAll(), 200, [], []);
     }
 }
