@@ -10,11 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class VideoDetailController extends AbstractController
 {
-    #[Route('/video/detail/{id}', name: 'app_video_detail')]
+    #[Route('/video/detail/{slug}/{id}', name: 'app_video_detail')]
     public function index($id, EntityManagerInterface $manager): Response
     {
-        $video = $manager->getRepository(Video::class)->find($id);
 
+        $video = $manager->getRepository(Video::class)->find($id);
 
         return $this->render('video_detail/index.html.twig', [
             'video' => $video,
