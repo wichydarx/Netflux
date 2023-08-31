@@ -1,38 +1,86 @@
-.carouselItems {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  transition: transform 0.5s ease-in-out;
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto &display=swap");
+			* {
+				box-sizing: border-box;
+			}
 
-.items div img {
-  width: 300px;
-}
+			body {
+				background: #141414;
+				font-family: "Roboto", sans-serif;
+			}
 
-.carouselItems {
-  display: flex;
-
-}
-
-.carouselBtn {
-  display: flex;
-  justify-content: space-between;
-}
-
-.prev-button {
-  position: relative;
-  bottom: 150px;
-  left: 25px;
-  background-color: #4caf4f00;
-  border: none;
-  color: white;
-}
-
-.next-button {
-  position: relative;
-  bottom: 150px;
-  right: 25px;
-  background-color: #4caf4f00;
-  border: none;
-  color: white;
-}
+			.carousel-container {
+				position: relative;
+			}
+			.carousel-container .title {
+				color: #fff;
+				padding: 0 36px;
+			}
+			.carousel-container .title h3 {
+				margin: 0;
+			}
+			.carousel-container .carousel-list {
+				overflow-x: auto;
+				padding: 0 36px;
+			}
+			.carousel-container .carousel-list::-webkit-scrollbar {
+				display: none;
+			}
+			.carousel-container .carousel-list .slider-content {
+				padding: 0;
+				display: flex;
+				flex-wrap: nowrap;
+				-webkit-overflow-scrolling: touch;
+				-ms-overflow-style: -ms-autohiding-scrollbar;
+			}
+			.carousel-container .carousel-list .slider-content li {
+				list-style-type: none;
+				flex: 0 0 auto;
+				width: calc(33.333% - 8px);
+				margin: 0 4px;
+				cursor: pointer;
+			}
+			.carousel-container .carousel-list .slider-content li div {
+				width: 100%;
+			}
+			.carousel-container .carousel-list .slider-content li div img {
+				border-radius: 8px;
+				width: 100%;
+			}
+			.carousel-container .carousel-list .slider-content li:nth-of-type(3),
+			.carousel-container .carousel-list .slider-content li:nth-of-type(7) {
+				position: relative;
+			}
+			.carousel-container .carousel-list .slider-content.next-animation {
+				transition: transform 0.7s ease;
+				pointer-events: none;
+			}
+			.carousel-container .prev,
+			.carousel-container .next {
+				position: absolute;
+				bottom: 0;
+				top: 0;
+				margin: auto;
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				z-index: 999;
+				background: transparent;
+			}
+			.carousel-container .prev:hover,
+			.carousel-container .next:hover {
+				background: rgba(0, 0, 0, 0.5);
+			}
+			.carousel-container .prev i,
+			.carousel-container .next i {
+				color: #fff;
+				padding: 12px;
+				display: none;
+			}
+			.carousel-container .next {
+				right: 0;
+			}
+			.carousel-container:hover .prev i,
+			.carousel-container:hover .next i {
+				display: block;
+				font-size: 24px;
+			}

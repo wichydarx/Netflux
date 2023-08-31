@@ -5,36 +5,42 @@
 {% endblock %}
 
 {% block body %}
-
 	{% if app.user %}
-		<div class="carouselContainer">
-			<div class="carouselSlider">
-				<h2>Comédie</h2>
-				<div class="carouselItems">
-					{% for video in videos %}
-						{% if video.genre.name == "Comédie" %}
-							<div class="items">
-								<div>
-									<p>{{video.title}}</p>
-									<img src="{{asset('uploads/pictures/')}}" alt="">
-								</div>
-							</div>
-						{% endif %}
-					{% endfor %}
+		{% for genre in genres %}
+			<div class="carousel-container">
+				<div class="title">
+					<h2>{{genre.name}}</h2>
+				</div>
+				<div onclick="prev();" class="prev"></div>
+				<div class="carousel-list">
+					<ul class="slider-content">
+						{% for video in videos %}
+							{% for genre in video.genre %}
+								{% if genre == "Comédie" %}
+									<li>
+										<div>
+											<img src="https://occ-0-179-1168.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaO9_8MycmHTpg4te3a80AngjLAdYubzDGRaYSmUK0NuMtLs2vZ_F4Lm0SepJ0qnpRmtFip03rIREaNrk_gl2exC2aZfSpxP99YpQUGQf2TDeIFT-Uxw0-ZoxT2zlHG-J6eBHv7x3vkC7DVf4fUch7oXe2wM7B_uXasIkjpzSVGnRT9QRX1JSPk.jpg?r=c6b"/>
+										</div>
+									</li>
+								{% endif %}
+							{% endfor %}
+
+							{% for genre == "Action" %}
+								<li>
+									<div>
+										<img src="https://occ-0-179-1168.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaO9_8MycmHTpg4te3a80AngjLAdYubzDGRaYSmUK0NuMtLs2vZ_F4Lm0SepJ0qnpRmtFip03rIREaNrk_gl2exC2aZfSpxP99YpQUGQf2TDeIFT-Uxw0-ZoxT2zlHG-J6eBHv7x3vkC7DVf4fUch7oXe2wM7B_uXasIkjpzSVGnRT9QRX1JSPk.jpg?r=c6b"/>
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
+						<div onclick="next();" class="next">
+							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="carouselBtn">
-				<button class="prev-button">
-					<i class="fa-solid fa-arrow-left fa-2xl"></i>
-				</button>
-				<button class="next-button">
-					<i class="fa-solid fa-arrow-right fa-2xl"></i>
-				</button>
-			</div>
-		</div>
+		{% endfor %}
 	{% else %}
 		{% include "components/_homeNotLogged.html.twig" %}
 	{% endif %}
-
-
 {% endblock %}
