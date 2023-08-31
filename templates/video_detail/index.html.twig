@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Videos{% endblock %}
+
+{% block body %}
+    <section>
+        <div>
+            <div>
+                <div>
+                    <img src="{{ asset('uploads/' ~ video.thumbnail) }}" alt="Video Thumbnail">
+                </div>
+                <div>
+                    <h3>{{ video.title }}</h3>
+                    <p>{{ video.description }}</p>
+                    <div>
+                        <span>{{ video.category }}</span>
+                    </div>
+                    <p>{{ video.description }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
