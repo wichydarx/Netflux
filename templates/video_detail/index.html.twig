@@ -1,63 +1,73 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Videos
+	Videos
 {% endblock %}
 
 {% block body %}
 
-<div class="d-flex justify-content-center">
-    <div class="card mb-3 bg-dark text-white" style="max-width: 80%;">
-        <div class="row g-0">
-            <div class="col-md-3 d-flex align-items-center justify-content-center">
-                <img src="{{ asset('uploads/' ~ video.thumbnail) }}" class="img-fluid rounded-start" alt="Video thumbnail">
-            </div>
-            <div class="col-md-9">
-                <div class="card-body">
-                    <h5 class="card-title">{{ video.title }}</h5>
-                    <p class="card-text">
-                        <small class="text-white">{{ video.category }},</small>
-                        <small class="text-white">{{ video.duration }}min</small>
-                    </p>
-                    <p class="card-text">{{ video.description }}</p>
-                    <button class="btn btn-warning mt-1" id="openModalButton">Voir le trailer</button>
-                    <a href="{{ video.path }}"><button class="btn btn-warning mt-1">Voir le trailer</button></a>
-                    {% if video.category == "film" %}
-                        <button class="btn btn-warning mt-1">Voir le film</button>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="d-flex justify-content-center">
+		<div class="card mb-3 bg-dark text-white" style="max-width: 80%;">
+			<div class="row g-0">
+				<div class="col-md-3 d-flex align-items-center justify-content-center">
+					<img src="{{ asset('uploads/thumbnail/' ~ video.thumbnail) }}" class="img-fluid rounded-start" alt="Video thumbnail">
+				</div>
+				<div class="col-md-9">
+					<div class="card-body">
+						<h5 class="card-title">{{ video.title }}</h5>
+						<p class="card-text">
+							<small class="text-white">{{ video.category }},</small>
+							<small class="text-white">{{ video.duration }}min</small>
+						</p>
+						<p class="card-text">{{ video.description }}</p>
+						<button class="btn btn-warning mt-1" id="openModalButton">Voir le trailer</button>
+						<a href="{{ video.path }}">
+							<button class="btn btn-warning mt-1">Voir le trailer</button>
+						</a>
+						{% if video.category == "film" %}
+							<button class="btn btn-warning mt-1">Voir le film</button>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-{% if video.category == "serie" %}
-<div class="container">
-    <button class="btn btn-warning mt-1 saison-button" data-season="1">Saison 1</button>
-    <button class="btn btn-warning mt-1 saison-button" data-season="2">Saison 2</button>
-    <button class="btn btn-warning mt-1 saison-button" data-season="3">Saison 3</button>
-    <button class="btn btn-warning mt-1 saison-button" data-season="4">Saison 4</button>
-    <div class="d-flex flex-column mt-2 episodes-section">
-        <div class="saison-1-episodes d-none">
-            <div><a class="text-decoration-none text-white" href="">Episode 1</a></div>
-            <div><a class="text-decoration-none text-white" href="">Episode 2</a></div>
-        </div>
-        <div class="saison-2-episodes d-none">
-            <div><a class="text-decoration-none text-white" href="">Episode 3</a></div>
-            <div><a class="text-decoration-none text-white" href="">Episode 4</a></div>
-        </div>
-    </div>
-</div>
-{% endif %}
+	{% if video.category == "serie" %}
+		<div class="container">
+			<button class="btn btn-warning mt-1 saison-button" data-season="1">Saison 1</button>
+			<button class="btn btn-warning mt-1 saison-button" data-season="2">Saison 2</button>
+			<button class="btn btn-warning mt-1 saison-button" data-season="3">Saison 3</button>
+			<button class="btn btn-warning mt-1 saison-button" data-season="4">Saison 4</button>
+			<div class="d-flex flex-column mt-2 episodes-section">
+				<div class="saison-1-episodes d-none">
+					<div>
+						<a class="text-decoration-none text-white" href="">Episode 1</a>
+					</div>
+					<div>
+						<a class="text-decoration-none text-white" href="">Episode 2</a>
+					</div>
+				</div>
+				<div class="saison-2-episodes d-none">
+					<div>
+						<a class="text-decoration-none text-white" href="">Episode 3</a>
+					</div>
+					<div>
+						<a class="text-decoration-none text-white" href="">Episode 4</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
 
 
-<!-- Modal -->
-<div id="videoModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <iframe id="videoFrame" height="315" src="{{ video.path }}" frameborder="0" allowfullscreen></iframe>
-    </div>
-</div>
+	<!-- Modal -->
+	<div id="videoModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<iframe id="videoFrame" height="315" src="{{ video.path }}" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
 
 {% endblock %}
