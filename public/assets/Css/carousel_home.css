@@ -9,11 +9,9 @@
   width: 300px;
 }
 
-.carouselItems {
-  display: flex;
-
+.items {
+  flex: 0 0 calc(100% / 5); 
 }
-
 .carouselBtn {
   display: flex;
   justify-content: space-between;
@@ -35,4 +33,31 @@
   background-color: #4caf4f00;
   border: none;
   color: white;
+}
+
+.carousel {
+  margin: 25px 75px;
+}
+
+.carouselSlider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.carouselItems {
+  display: flex;
+  margin: 0 35px;
+  overflow-x: hidden; 
+  scroll-behavior: smooth;
+}
+
+.carouselItems > * {
+  flex: 0 0 auto;
+  margin-right: 50px;
+}
+
+.carouselItems > :last-child {
+  margin-right: 0;
 }

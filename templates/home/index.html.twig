@@ -5,36 +5,37 @@
 {% endblock %}
 
 {% block body %}
-
 	{% if app.user %}
-		<div class="carouselContainer">
-			<div class="carouselSlider">
-				<h2>Comédie</h2>
-				<div class="carouselItems">
-					{% for video in videos %}
-						{% if video.genre.name == "Comédie" %}
-							<div class="items">
-								<div>
-									<p>{{video.title}}</p>
-									<img src="{{asset('uploads/pictures/')}}" alt="">
-								</div>
-							</div>
-						{% endif %}
-					{% endfor %}
+		{% for genre in genres %}
+			<div class="carouselContainer">
+				<h2>{{genre.name}}</h2>
+				<div class="carouselSlider">
+					<div class="carouselItems">
+						{% for video in videos %}
+							{% for genre in video.genre %}
+								{% if genre == "Comédie" %}
+									<div class="items">
+										<div>
+											<p>{{video.title}}</p>
+											<img src="{{asset('uploads/avatar/hmmmm-64ef15516d65e.jpg')}}" alt="">
+										</div>
+									</div>
+								{% endif %}
+							{% endfor %}
+						{% endfor %}
+					</div>
+				</div>
+				<div class="carouselBtn carousel-arrow">
+					<button class="prev-button">
+						<i class="fa-solid fa-arrow-left fa-2xl"></i>
+					</button>
+					<button class="next-button">
+						<i class="fa-solid fa-arrow-right fa-2xl"></i>
+					</button>
 				</div>
 			</div>
-			<div class="carouselBtn">
-				<button class="prev-button">
-					<i class="fa-solid fa-arrow-left fa-2xl"></i>
-				</button>
-				<button class="next-button">
-					<i class="fa-solid fa-arrow-right fa-2xl"></i>
-				</button>
-			</div>
-		</div>
+		{% endfor %}
 	{% else %}
 		{% include "components/_homeNotLogged.html.twig" %}
 	{% endif %}
-
-
 {% endblock %}
