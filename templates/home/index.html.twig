@@ -6,7 +6,7 @@
 
 {% block body %}
 
-	{# {% if app.user %}
+	{% if app.user %}
 		<div class="carouselContainer">
 			<div class="carouselSlider">
 				<h2>Comédie</h2>
@@ -34,7 +34,7 @@
 		</div>
 	{% else %}
 		{% include "components/_homeNotLogged.html.twig" %}
-	{% endif %} #}
+	{% endif %}
 
 
 {% endblock %}
