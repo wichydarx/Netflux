@@ -1,9 +1,9 @@
 <div class="container-fluid">
-	<header class="d-flex flex-wrap align-items-center {{app.user ? "" : " flex-column"}} justify-content-center justify-content-md-between py-3 mb-4">
+	<header class="d-flex flex-wrap  align-items-center {{app.user ? " " : " flex-column flex-md-row"}} justify-content-center justify-content-md-between  py-3 mb-4">
 
-		<div class="col-md-3 mb-2 mb-md-0">
+		<div class="col-md-3 mb-2 mb-md-2">
 			<a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-				<img src="{{asset('assets/pictures/NETFLUX_64.png')}}" class="bi "alt="">
+				<img src="{{asset('assets/pictures/NETFLUX_64.png')}}" class="bi " alt="">
 			</a>
 		</div>
 
@@ -26,6 +26,16 @@
 
 				</li>
 			</ul>
+
+
+			<form class="col-12 col-md-auto d-flex flex-column flex-md-row align-items-center justify-content-center mt-md-3" method= "POST"
+			action="{{path('app_search')}}">
+				<input type="search" class="form-control form-control-dark w-50"
+				name="search"
+				 placeholder="Rechercher..." aria-label="Search">
+				<button type="submit" class="btn btn-outline-secondary mx-2 text-light text-center">Rechercher</button>
+			</form>
+
 
 			<div class="btn-group mx-2">
 				<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
