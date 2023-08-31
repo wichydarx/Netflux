@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Genre;
 use App\Entity\Video;
 use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,13 +25,15 @@ class HomeController extends AbstractController
     {
 
         $videos = $this->manager->getRepository(Video::class)->findAll();
+        $genres = $this->manager->getRepository(Genre::class)->findAll();
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'videos' => $videos
+            'videos' => $videos,
+            'genres' => $genres
         ]);
     }
-
+  
     #[Route('/api/videos', name: 'app_movie')]
     public function test(VideoRepository $videoRepository)
     {
