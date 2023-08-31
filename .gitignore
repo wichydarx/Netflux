@@ -9,6 +9,7 @@
 /public/bundles/
 /var/
 /vendor/
+/DEVSENSE/
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
