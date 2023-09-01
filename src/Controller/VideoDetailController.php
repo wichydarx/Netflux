@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Video;
+use App\Entity\Episode;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,9 +16,12 @@ class VideoDetailController extends AbstractController
     {
 
         $video = $manager->getRepository(Video::class)->find($id);
+        $episodes = $manager->getRepository(Episode::class)->findBy(['video' => $video]);
+    
 
         return $this->render('video_detail/index.html.twig', [
             'video' => $video,
+            'episodes' => $episodes,
         ]);
     }
 }
