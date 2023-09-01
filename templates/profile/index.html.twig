@@ -18,7 +18,7 @@
 						<div class="card-body">
 							<h1 class="card-title mb-4">Bienvenue
 								{{ user.firstname }}</h1>
-							<img src="{{asset("/uploads/avatar/" ~ user.avatar) }}" alt="Avatar de {{ user.firstname }}" class="img-fluid">
+							<img src="{{asset("/uploads/avatar/" ~ (user.avatar ? user.avatar :"avatar_default.png")) }}" alt="Avatar de {{ user.firstname }}" class="img-fluid">
 							<div class="mt-5">
 								<p class="card-text">
 									<strong>Prénom :</strong>
@@ -30,7 +30,8 @@
 									<strong>Email :</strong>
 									{{ user.email }}</p>
 								<div class="d-grid gap-2">
-									<a href="{{ path('app_profile') }}">
+									<a href="{{ path('app_edit_profile') }}">
+
 										<button class="btn btn-warning mt-2" type="submit">
 											Modifier mes informations
 										</button>
