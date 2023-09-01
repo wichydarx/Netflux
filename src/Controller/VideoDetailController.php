@@ -17,30 +17,41 @@ class VideoDetailController extends AbstractController
     {
 
         $video = $manager->getRepository(Video::class)->find($id);
+        $review = $manager->getRepository(Review::class)->find($id);
         $episodes = $manager->getRepository(Episode::class)->findBy(['video' => $video]);
+
 
 
         return $this->render('video_detail/index.html.twig', [
             'video' => $video,
             'episodes' => $episodes,
+            'review' => $review,
         ]);
     }
 
-    public function likeVideo($id, EntityManagerInterface $entityManager): Response
+    #[Route('/video/detail/{slug}/{id}/like', name: 'app_video_detail_like')]
+    public function likeVideo($reviewId, EntityManagerInterface $entityManager): Response
     {
-        $video = $entityManager->getRepository(Review::class)->find($id);
-        $video->setThumbsUp($video->getThumbsUp() + 1);
+        $review = $entityManager->getRepository(Review::class)->find($reviewId);
+        $review->setThumbsUp($review->getThumbsUp() + 1);
+        $review->setUser($this->getUser()->getId());
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_video_detail', ['id' => $video->getId()]);
+        return $this->redirectToRoute('app_video_detail', [
+            'id' => $review->getId(),
+        ]);
     }
 
-    public function dislikeVideo($id, EntityManagerInterface $entityManager): Response
+    #[Route('/video/detail/{slug}/{id}/dislike', name: 'app_video_detail_dislike')]
+    public function dislikeVideo($reviewId, EntityManagerInterface $entityManager): Response
     {
-        $video = $entityManager->getRepository(Review::class)->find($id);
-        $video->setDislike($video->getDislike() + 1);
+        $review = $entityManager->getRepository(Review::class)->find($reviewId);
+        $review->setDislike($review->getDislike() + 1);
+        $review->setUser($this->getUser()->getId());
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_video_detail', ['id' => $video->getId()]);
+        return $this->redirectToRoute('app_video_detail', [
+            'id' => $review->getId(),
+        ]);
     }
 }

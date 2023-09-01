@@ -15,60 +15,70 @@
 				<div class="col-md-9">
 					<div class="card-body">
 						<h5 class="card-title">{{ video.title }}</h5>
-						<p class="card-text">
-							<small class="text-white">{{ video.category }},</small>
-							<small class="text-white">{{ video.duration }}min</small>
-						</p>
-						<p class="card-text">{{ video.description }}</p>
-						<button class="btn btn-warning mt-1" id="openModalButton">Voir le trailer</button>
-						{% if video.category == "film" %}
-							<button class="btn btn-warning mt-1">Voir le film</button>
-						{% endif %}
+						<span class="card-text">
+							<div class="mx-3">
+								<a href="{{ path('app_video_detail_like', {'id': video.id, 'slug': video.slug }) }}" class="btn btn-primary">
+
+									<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+								</a>
+								<span class="badge badge-primary">{{video.reviews.thumbsUp}}</span>
+							</div>
+							{# <div class="mx-3">
+																						<a href="{{ path('app_dish_dislike', {'id': dish.id}) }}" class="btn btn-danger"></span> #}
+							<p class="card-text">
+								<small class="text-white">{{ video.category }},</small>
+								<small class="text-white">{{ video.duration }}min</small>
+							</p>
+							<p class="card-text">{{ video.description }}</p>
+							<button class="btn btn-warning mt-1" id="openModalButton">Voir le trailer</button>
+							{% if video.category == "film" %}
+								<button class="btn btn-warning mt-1">Voir le film</button>
+							{% endif %}
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	{% if video.category == "serie" %}
-		<div class="container">
-			{% set seasons = [] %}
-			{% for episode in episodes %}
-				{% set seasonNumber = episode.saison %}
-				{% if seasonNumber not in seasons %}
-					<button class="btn btn-warning mt-1 saison-button" data-season="{{ seasonNumber }}">Saison
-						{{ seasonNumber }}</button>
-					{% set seasons = seasons|merge([seasonNumber]) %}
-				{% endif %}
-			{% endfor %}
-			<div class="d-flex flex-column mt-2 episodes-section">
-				{% for seasonNumber in seasons %}
-					<div class="saison-{{ seasonNumber }}-episodes d-none">
-						{% for episode in episodes %}
-							{% if episode.saison == seasonNumber  %}
-								<div>
-									<a class="text-decoration-none text-white" href="">{{episode.title}}</a>
-								</div>
-							{% endif %}
-						{% endfor %}
-					</div>
+		{% if video.category == "serie" %}
+			<div class="container">
+				{% set seasons = [] %}
+				{% for episode in episodes %}
+					{% set seasonNumber = episode.saison %}
+					{% if seasonNumber not in seasons %}
+						<button class="btn btn-warning mt-1 saison-button" data-season="{{ seasonNumber }}">Saison
+							{{ seasonNumber }}</button>
+						{% set seasons = seasons|merge([seasonNumber]) %}
+					{% endif %}
 				{% endfor %}
+				<div class="d-flex flex-column mt-2 episodes-section">
+					{% for seasonNumber in seasons %}
+						<div class="saison-{{ seasonNumber }}-episodes d-none">
+							{% for episode in episodes %}
+								{% if episode.saison == seasonNumber  %}
+									<div>
+										<a class="text-decoration-none text-white" href="">{{episode.title}}</a>
+									</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
+
+
+		<div id="videoModal" class="modal">
+			<div class="modal-content">
+				<video id="player" style="--plyr-color-main: #ffc107" playsinline controls data-poster="/path/to/poster.jpg">
+					<source src="{{ asset('uploads/videos/' ~ video.path) }}" type="video/mp4"/>
+					<span class="close">&times;</span>
+					<span id="closeModalButton">
+						Fermer
+					</span>
+				</video>
 			</div>
 		</div>
-	{% endif %}
 
 
-	<div id="videoModal" class="modal">
-		<div class="modal-content">
-			<video id="player" style="--plyr-color-main: #ffc107" playsinline controls data-poster="/path/to/poster.jpg">
-				<source src="{{ asset('uploads/videos/' ~ video.path) }}" type="video/mp4"/>
-				<span class="close">&times;</span>
-				<span id="closeModalButton">
-					Fermer
-				</span>
-			</video>
-		</div>
-	</div>
-
-
-{% endblock %}
+	{% endblock %}
