@@ -1,5 +1,7 @@
 console.log('Hello World from app.js');
 
+const player = new Plyr('#player');
+
 async function fetchVideos (){
     await fetch('/api/videos')
     .then(response => response.json())
@@ -13,17 +15,20 @@ var modal = document.getElementById("videoModal");
 var openButton = document.getElementById("openModalButton");
 var closeButton = document.getElementsByClassName("close")[0];
 
+
 openButton.addEventListener("click", function() {
     modal.style.display = "block";
 });
 
 closeButton.addEventListener("click", function() {
     modal.style.display = "none";
+    player.pause();
 });
 
 window.addEventListener("click", function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        player.pause();
     }
 });
 
