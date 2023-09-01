@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<header class="d-flex flex-wrap  align-items-center {{app.user ? " " : " flex-column flex-md-row"}} justify-content-center justify-content-md-between  py-3 mb-4">
 
-		<div class="col-md-3 mb-2 mb-md-2">
+		<div class="col-md-3 mb-2 mb-md-0 logo">
 			<a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
 				<img src="{{asset('assets/pictures/NETFLUX_64.png')}}" class="bi " alt="">
 			</a>
@@ -46,12 +46,12 @@
 
 					</li>
 					<li>
-						<a class="dropdown-item " href="#">Paramettre</a>
+						<a class="dropdown-item " href="#">Paramètres</a>
 
 					</li>
 					<li><hr class="dropdown-divider"></li>
 					<li>
-						<a class="dropdown-item" href='{{path('app_logout')}}'>se deconnecter</a>
+						<a class="dropdown-item" href='{{path('app_logout')}}'>Se déconnecter</a>
 					</li>
 				</ul>
 			</div>
