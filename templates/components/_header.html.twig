@@ -82,88 +82,73 @@
 						</a>
 						<!-- Dropdown menu -->
 						<ul class="dropdown-menu dropdown-menu-end notifications-list p-1 dropdown-menu-dark" aria-labelledby="navbarDropdown">
-							<li>
-								<div class="row">
-									<div class="col-md">
-										<img src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg" height='63' width='auto' class="d-block" alt="..."/>
-									</div>
-									<div class="col-md">
-										<p class="h6 mb-0">
-											New
-
-										</p>
-										<p class="h6 mb-1">
-											Movie title
-
-										</p>
-										<span class="small">
-											Today
-
-										</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<hr class="dropdown-divider"/>
-								<a class="btn btn-outline-dark text-light" href="#">{% trans %}
-									Tout effacer
-									{% endtrans %}</a>
-
-							</li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="{{ asset("/uploads/avatar/" ~ (app.user.avatar ? app.user.avatar :"avatar_default.png")) }}" class="rounded-circle img-fluid" height="25" width="25" alt="user avatar"></a>
-						<!-- Dropdown menu -->
-						<ul class="dropdown-menu dropdown-menu-end p-1 dropdown-menu-dark" aria-labelledby="navbarDropdown">
-
-							<li class="my-2 d-flex flex-column align-items-center justify-content-between">
-								<img src="{{ asset("/uploads/avatar/" ~ (app.user.avatar ? app.user.avatar :"avatar_default.png")) }}" class="rounded-circle img-fluid" height="25" width="25" alt="user avatar">
-
-								<span>
-									{{ app.user.lastname ~ " " ~ app.user.firstname }}
-								</span>
-							</li>
-							<li>
-								<a class="dropdown-item" href="{{path('app_profile')}}">
-
-									{% trans %}
-									Profil
-									{% endtrans %}
-								</a>
-
-							</li>
-							<li>
-								<hr class="dropdown-divider"/>
-							</li>
-							{% if is_granted('ROLE_ADMIN')%}
-
-								<li>
-									<a class="dropdown-item" href="/admin">
-										{% trans %}
-										Dashboard
-										{% endtrans %}
-									</a>
-
+							{% for notification in app.user.notifications %}
+								{{notification.content |raw}}
+							{% else %}
+								<li>{% trans %}
+									Pas de nouvelle notifications{% endtrans %}
 								</li>
-							{% endif %}
-							<li>
-								<a class="dropdown-item" href='{{ path('app_logout') }}'>
-									{% trans %}
-									Se Deconnecter
-									{% endtrans %}
-								</a>
-							</li>
+							</a>
 						</li>
-					</li>
+
+					{% endfor %}
+					{% if  app.user.notifications is null %}
+						<li>
+							<hr class="dropdown-divider"/>
+							<a class="btn btn-outline-dark text-light" href="{{path('app_notifications_remove')}}">{% trans %}
+								Tout effacer
+								{% endtrans %}</a>
+
+						</li>
+					{% endif %}
 				</ul>
 			</li>
-		</ul>
-	</div>
-{% else %}
-	<div class="col-md-3 text-end ">
-		<a href='{{path('app_login')}}' class="btn btn-warning">{% trans %}Se Connecter{% endtrans %}</a>
-	</div>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<img src="{{ asset("/uploads/avatar/" ~ (app.user.avatar ? app.user.avatar :"avatar_default.png")) }}" class="rounded-circle img-fluid" height="25" width="25" alt="user avatar"></a>
+				<!-- Dropdown menu -->
+				<ul class="dropdown-menu dropdown-menu-end p-1 dropdown-menu-dark" aria-labelledby="navbarDropdown">
 
-{% endif %}</div></nav>
+					<li class="my-2 d-flex flex-column align-items-center justify-content-between">
+						<img src="{{ asset("/uploads/avatar/" ~ (app.user.avatar ? app.user.avatar :"avatar_default.png")) }}" class="rounded-circle img-fluid" height="25" width="25" alt="user avatar">
+
+						<span>
+							{{ app.user.lastname ~ " " ~ app.user.firstname }}
+						</span>
+					</li>
+					<li>
+						<a class="dropdown-item" href="{{path('app_profile')}}">
+
+							{% trans %}
+							Profil
+							{% endtrans %}
+						</a>
+
+					</li>
+					<li>
+						<hr class="dropdown-divider"/>
+					</li>
+					{% if is_granted('ROLE_ADMIN')%}
+
+						<li>
+							<a class="dropdown-item" href="/admin">
+								{% trans %}
+								Dashboard
+								{% endtrans %}
+							</a>
+
+						</li>
+					{% endif %}
+					<li>
+						<a class="dropdown-item" href='{{ path('app_logout') }}'>
+							{% trans %}
+							Se Deconnecter
+							{% endtrans %}
+						</a>
+					</li>
+				</li>
+			</li>
+		</ul>
+	</li>
+</ul></div>{% else %}<div class="col-md-3 text-end ">
+<a href='{{path('app_login')}}' class="btn btn-warning">{% trans %}Se Connecter{% endtrans %}</a></div>{% endif %}</div></nav>
