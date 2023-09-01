@@ -52,4 +52,5 @@ class HomeController extends AbstractController
 
         return $this->json($videoRepository->findAll(), 200, [], []);
     }
+
 }
