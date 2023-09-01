@@ -6,70 +6,70 @@
 {% endblock %}
 
 {% block body %}
-
-	<div class="d-flex justify-content-center">
-		<div class="card mb-3 bg-dark text-white" style="max-width: 80%;">
-			<div class="row g-0">
-				<div class="col-md-3 d-flex align-items-center justify-content-center">
-					<img src="{{ asset('uploads/thumbnail/' ~ video.thumbnail) }}" class="img-fluid rounded-start" alt="Video thumbnail">
-				</div>
-				<div class="col-md-9">
-					<div class="card-body">
-						<h5 class="card-title">{{ video.title }}</h5>
-						<p class="card-text">
-							<small class="text-white">{{ video.category }},</small>
-							<small class="text-white">{{ video.duration }}min</small>
-						</p>
-						<p class="card-text">{{ video.description }}</p>
-						<button class="btn btn-warning mt-1" id="openModalButton">Voir le trailer</button>
-						{% if video.category == "film" %}
-							<button class="btn btn-warning mt-1">Voir le film</button>
-						{% endif %}
+	<section>
+		<div class="d-flex justify-content-center">
+			<div class="card mb-3 bg-dark text-white" style="max-width: 80%;">
+				<div class="row g-0">
+					<div class="col-md-3 d-flex align-items-center justify-content-center">
+						<img src="{{ asset('uploads/thumbnail/' ~ video.thumbnail) }}" class="img-fluid rounded-start" alt="Video thumbnail">
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	{% if video.category == "serie" %}
-		<div class="container">
-			{% set seasons = [] %}
-			{% for episode in episodes %}
-				{% set seasonNumber = episode.saison %}
-				{% if seasonNumber not in seasons %}
-					<button class="btn btn-warning mt-1 saison-button" data-season="{{ seasonNumber }}">Saison
-						{{ seasonNumber }}</button>
-					{% set seasons = seasons|merge([seasonNumber]) %}
-				{% endif %}
-			{% endfor %}
-			<div class="d-flex flex-column mt-2 episodes-section">
-				{% for seasonNumber in seasons %}
-					<div class="saison-{{ seasonNumber }}-episodes d-none">
-						{% for episode in episodes %}
-							{% if episode.saison == seasonNumber  %}
-								<div>
-									<a class="text-decoration-none text-white" href="">{{episode.title}}</a>
-								</div>
+					<div class="col-md-9">
+						<div class="card-body">
+							<h5 class="card-title">{{ video.title }}</h5>
+							<p class="card-text">
+								<small class="text-white">{{ video.category }},</small>
+								<small class="text-white">{{ video.duration }}min</small>
+							</p>
+							<p class="card-text">{{ video.description }}</p>
+							<button class="btn btn-warning mt-1" id="openModalButton">Voir le trailer</button>
+							{% if video.category == "film" %}
+								<button class="btn btn-warning mt-1">Voir le film</button>
 							{% endif %}
-						{% endfor %}
+						</div>
 					</div>
-				{% endfor %}
+				</div>
 			</div>
 		</div>
-	{% endif %}
+
+		{% if video.category == "serie" %}
+			<div class="container">
+				{% set seasons = [] %}
+				{% for episode in episodes %}
+					{% set seasonNumber = episode.saison %}
+					{% if seasonNumber not in seasons %}
+						<button class="btn btn-warning mt-1 saison-button" data-season="{{ seasonNumber }}">Saison
+							{{ seasonNumber }}</button>
+						{% set seasons = seasons|merge([seasonNumber]) %}
+					{% endif %}
+				{% endfor %}
+				<div class="d-flex flex-column mt-2 episodes-section">
+					{% for seasonNumber in seasons %}
+						<div class="saison-{{ seasonNumber }}-episodes d-none">
+							{% for episode in episodes %}
+								{% if episode.saison == seasonNumber  %}
+									<div>
+										<a class="text-decoration-none text-white" href="">{{episode.title}}</a>
+									</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
 
 
-	<div id="videoModal" class="modal">
-		<div class="modal-content">
-			<video id="player" style="--plyr-color-main: #ffc107" playsinline controls data-poster="/path/to/poster.jpg">
-				<source src="{{ asset('uploads/videos/' ~ video.path) }}" type="video/mp4"/>
-				<span class="close">&times;</span>
-				<span id="closeModalButton">
-					Fermer
-				</span>
-			</video>
+		<div id="videoModal" class="modal">
+			<div class="modal-content">
+				<video id="player" style="--plyr-color-main: #ffc107" playsinline controls data-poster="/path/to/poster.jpg">
+					<source src="{{ asset('uploads/videos/' ~ video.path) }}" type="video/mp4"/>
+					<span class="close">&times;</span>
+					<span id="closeModalButton">
+						Fermer
+					</span>
+				</video>
+			</div>
 		</div>
-	</div>
 
-
+	</section>
 {% endblock %}
