@@ -6,6 +6,7 @@ use App\Entity\Genre;
 use App\Entity\Video;
 use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,7 +34,18 @@ class HomeController extends AbstractController
             'genres' => $genres
         ]);
     }
-  
+
+    #[Route('/search', name: 'app_search')]
+    public function search(Request $request, EntityManagerInterface $em): Response
+  {
+    $title = $request->request->get('search');
+    $videos = $em->getRepository(Video::class)->searchByTitle($title);
+    
+    return $this->render('home/search.html.twig', [
+      'videos' => $videos,
+      'title' => $title
+    ]);
+  }
     #[Route('/api/videos', name: 'app_movie')]
     public function test(VideoRepository $videoRepository)
     {
