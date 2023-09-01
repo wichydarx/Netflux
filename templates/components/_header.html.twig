@@ -92,7 +92,7 @@
 						</li>
 
 					{% endfor %}
-					{% if  app.user.notifications is null %}
+					{% if  app.user.notifications is not empty %}
 						<li>
 							<hr class="dropdown-divider"/>
 							<a class="btn btn-outline-dark text-light" href="{{path('app_notifications_remove')}}">{% trans %}
