@@ -18,6 +18,9 @@
 								<a href="{{path('app_video_detail',{'slug':video.slug, 'id':video.id})}}">
 									<li>
 										<img src="{{asset('uploads/thumbnail/' ~ video.thumbnail)}}" alt="">
+										<div class="logo">
+											<img src="{{asset('assets/pictures/NETFLUX_64.png')}}" class="" alt="">
+										</div>
 										<p>{{video.title}}</p>
 										<p>{{video.category}}</p>
 									</li>

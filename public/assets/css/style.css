@@ -8,6 +8,10 @@ body {
   color: white !important;
 }
 
+.logo {
+  width: 64px;
+}
+
 /* -------------------------------Style modal single video */
 .modal {
   display: none;
