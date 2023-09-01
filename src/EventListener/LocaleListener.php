@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 class LocaleListener
 {
-    public function __construct(private RequestStack $requestStack )
+    public function __construct(private RequestStack $requestStack)
     {
     }
     #[AsEventListener]
@@ -17,7 +17,6 @@ class LocaleListener
         $request = $event->getRequest();
 
         $locale = $request->attributes->get('_locale') ?? $request->getSession()->get('_locale', 'fr');
-        dd($request);
         $request->setLocale($locale);
     }
 }
