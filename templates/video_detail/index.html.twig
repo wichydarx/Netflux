@@ -21,9 +21,6 @@
 						</p>
 						<p class="card-text">{{ video.description }}</p>
 						<button class="btn btn-warning mt-1" id="openModalButton">Voir le trailer</button>
-						<a href="{{ video.path }}">
-							<button class="btn btn-warning mt-1">Voir le trailer</button>
-						</a>
 						{% if video.category == "film" %}
 							<button class="btn btn-warning mt-1">Voir le film</button>
 						{% endif %}
@@ -33,41 +30,44 @@
 		</div>
 	</div>
 
-
-	{% if video.category == "serie" %}
-		<div class="container">
-			<button class="btn btn-warning mt-1 saison-button" data-season="1">Saison 1</button>
-			<button class="btn btn-warning mt-1 saison-button" data-season="2">Saison 2</button>
-			<button class="btn btn-warning mt-1 saison-button" data-season="3">Saison 3</button>
-			<button class="btn btn-warning mt-1 saison-button" data-season="4">Saison 4</button>
-			<div class="d-flex flex-column mt-2 episodes-section">
-				<div class="saison-1-episodes d-none">
-					<div>
-						<a class="text-decoration-none text-white" href="">Episode 1</a>
-					</div>
-					<div>
-						<a class="text-decoration-none text-white" href="">Episode 2</a>
-					</div>
-				</div>
-				<div class="saison-2-episodes d-none">
-					<div>
-						<a class="text-decoration-none text-white" href="">Episode 3</a>
-					</div>
-					<div>
-						<a class="text-decoration-none text-white" href="">Episode 4</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	{% endif %}
+{% if video.category == "serie" %}
+    <div class="container">
+        {% set seasons = [] %}
+        {% for episode in episodes %}
+            {% set seasonNumber = episode.saison %}
+            {% if seasonNumber not in seasons %}
+                <button class="btn btn-warning mt-1 saison-button" data-season="{{ seasonNumber }}">Saison {{ seasonNumber }}</button>
+                {% set seasons = seasons|merge([seasonNumber]) %}
+            {% endif %}
+        {% endfor %}
+        <div class="d-flex flex-column mt-2 episodes-section">
+            {% for seasonNumber in seasons %}
+                <div class="saison-{{ seasonNumber }}-episodes d-none">
+                    {% for episode in episodes %} {% if episode.saison == seasonNumber  %}
+                        <div>
+                            <a class="text-decoration-none text-white" href="">{{episode.title}}</a>
+                        </div>
+						{% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
 
 
-	<!-- Modal -->
-	<div id="videoModal" class="modal">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-			<iframe id="videoFrame" height="315" src="{{ video.path }}" frameborder="0" allowfullscreen></iframe>
-		</div>
-	</div>
+
+<!-- Modal -->
+<div id="videoModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <video id="videoFrame" height="315" controls>
+            <source src="{{ asset('uploads/videos/' ~ video.path) }}" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+    </div>
+</div>
+
+
 
 {% endblock %}
