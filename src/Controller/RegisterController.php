@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -19,7 +20,7 @@ class RegisterController extends AbstractController
     private $fileUploader;
     private $manager;
 
-    public function __construct(UserPasswordHasherInterface $passwordHash, FileUploader $fileUploader, EntityManagerInterface $manager)
+    public function __construct(UserPasswordHasherInterface $passwordHash, FileUploader $fileUploader, EntityManagerInterface $manager, private TranslatorInterface $translator)
     {
         $this->passwordHash = $passwordHash;
         $this->fileUploader = $fileUploader;
@@ -52,9 +53,9 @@ class RegisterController extends AbstractController
                 $this->manager->persist($user);
                 $this->manager->flush();
                 return $this->redirectToRoute('app_login');
-                $this->addFlash('success', 'Votre inscription a été validée avec succès. Vous pouvez maintenant vous connecter à votre compte.');
+                $this->addFlash('success', $this->translator->trans('Votre inscription a été validée avec succès. Vous pouvez maintenant vous connecter à votre compte.'));
             } catch (\Throwable $th) {
-                $this->addFlash('danger', 'Une erreur est survenue lors de l\'inscription');
+                $this->addFlash('danger', $this->translator->trans('Une erreur est survenue lors de l\'inscription'));
             }
         }
         return $this->render('register/index.html.twig', [

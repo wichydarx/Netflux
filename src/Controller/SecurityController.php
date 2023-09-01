@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -23,7 +24,8 @@ class SecurityController extends AbstractController
         private EntityManagerInterface $entityManager,
         private UserPasswordHasherInterface $passwordHasher,
         private  TokenGeneratorInterface $tokenGenerator,
-        private MailJet $mailJet
+        private MailJet $mailJet,
+        public TranslatorInterface $translator
     )
     {
     }
@@ -60,7 +62,7 @@ class SecurityController extends AbstractController
             $data = $form->getData();
             $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $data['email']]);
             if (!$user) {
-                $this->addFlash('danger', 'Une erreur est survenue ');
+                $this->addFlash('danger',$this->translator->trans('Une erreur est survenue , veuillez réessayer'));
                 return $this->redirectToRoute('app_login');
             }
             $token = $this->tokenGenerator->generateToken();
@@ -69,11 +71,11 @@ class SecurityController extends AbstractController
                 $this->entityManager->flush();
                 $url = $this->generateUrl('app_reset_password', ['token' => $token],
                 UrlGeneratorInterface::ABSOLUTE_URL);
-                $this->mailJet->sendEmailToUser($user, 'Réinitialisation de mot de passe', $url);
-                $this->addFlash('success', 'Un email de réinitialisation de mot de passe vous a été envoyé');
+                $this->mailJet->sendEmailToUser($user, $this->translator->trans('Réinitialisation de mot de passe'), $url);
+                $this->addFlash('success',$this->translator->trans('Un email de réinitialisation de mot de passe vous a été envoyé'));
                 return $this->redirectToRoute('app_login');
             } catch (\Exception $e) {
-                $this->addFlash('warning', 'Une erreur est survenue : ' . $e->getMessage());
+                $this->addFlash('warning', $this->translator->trans('Une erreur est survenue : ' . $e->getMessage()));
                 return $this->redirectToRoute('app_login');
             }
         
@@ -109,7 +111,7 @@ class SecurityController extends AbstractController
                 $entityManager->persist($user);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Mot de passe changé avec succès');
+                $this->addFlash('success', $this->translator->trans('Mot de passe changé avec succès'));
                 return $this->redirectToRoute('app_login');
             }
 
@@ -117,7 +119,7 @@ class SecurityController extends AbstractController
                 'form' => $form->createView()
             ]);
         }
-        $this->addFlash('danger', 'Jeton invalide');
+        $this->addFlash('danger', $this->translator->trans('Jeton invalide'));
         return $this->redirectToRoute('app_login');
         return $this->render('security/reset_password.html.twig');
     }
