@@ -48,26 +48,26 @@ class VideoCrudController extends AbstractCrudController
     {
 
         return [
-            TextField::new('title'),
-            TextareaField::new('description'),
-            ChoiceField::new('category')->setChoices([
+            TextField::new('title', 'Titre'),
+            TextareaField::new('description', 'Description'),
+            ChoiceField::new('category', 'Catégorie')->setChoices([
                 'Film' => 'film',
                 'Série' => 'serie',
             ]),
-            SlugField::new('slug')->setTargetFieldName('title')
+            SlugField::new('slug', 'URL')->setTargetFieldName('title')
                 ->hideOnIndex()
-                ->setUnlockConfirmationMessage("Etes vous sur de vouloir changer le slug ?"),
-            ImageField::new('thumbnail')
+                ->setUnlockConfirmationMessage("Etes vous sur de vouloir changer l'URL ?"),
+            ImageField::new('thumbnail', 'Miniature')
                 ->SetBasePath('uploads/thumbnail/') // destination du fichier image
                 ->setUploadDir('public/uploads/thumbnail/') // destination final du fichier image
                 ->setUploadedFileNamePattern('[randomhash].[extension]') //selection de l extention du fichier ET GENERATION D'UNE CHAINE DE CARACTERE
                 ->setRequired(false),
-            IntegerField::new('duration'),
-            ImageField::new('path') -> SetBasePath('uploads/videos/')
+            IntegerField::new('duration', 'Durée (en min.)'),
+            ImageField::new('path', 'Vidéo')->SetBasePath('uploads/videos/')
                 ->setUploadDir('public/uploads/videos/')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->onlyOnForms(),
-            AssociationField::new('genre')
+            AssociationField::new('genre', 'Genre')
 
         ];
     }
