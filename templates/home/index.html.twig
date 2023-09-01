@@ -17,7 +17,7 @@
 							{% for video in genre.videos %}
 								<a href="{{path('app_video_detail',{'slug':video.slug, 'id':video.id})}}">
 									<li>
-										<img src="{{asset('uploads/thumbnail/' ~ video.thumbnail)}}" alt="">
+										<img src="{{asset('uploads/thumbnail/' ~ video.thumbnail)}}" class="thumbnail" alt="">
 										<p>{{video.title}}</p>
 										<p>{{video.category}}</p>
 									</li>
