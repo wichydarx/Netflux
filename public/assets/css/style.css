@@ -63,4 +63,13 @@ section {
         flex-direction: row !important;
         justify-content: space-between !important;
     }
+    .w-md-75 {
+        width: 100% !important;
+    }
+}
+/*media querries minwith 768*/
+@media (min-width: 768px) {
+    .w-md-75 {
+        width: 75% !important;
+    }
 }
