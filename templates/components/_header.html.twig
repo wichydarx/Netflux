@@ -6,7 +6,7 @@
 		<!-- Navbar brand -->
 		<a class="navbar-brand" href="{{ path('app_home') }}">
 
-			<img src="{{asset('assets/pictures/NETFLUX_64.png')}}" alt="logo_netflux" loading="lazy"/>
+			<img src="{{ asset('assets/pictures/NETFLUX_64.png') }}" alt="logo_netflux" loading="lazy"/>
 
 		</a>
 
@@ -16,9 +16,8 @@
 				<i class="fas fa-bars"></i>
 			</button>
 
-
 			<div
-				class="collapse navbar-collapse   " id="navbarSupportedContent">
+				class="collapse navbar-collapse" id="navbarSupportedContent">
 				<!-- Left links -->
 				<ul class="navbar-nav d-flex align-items-center justify-content-center me-auto mb-2 mb-lg-0">
 
@@ -27,6 +26,7 @@
 
 							{% trans %}
 							Accueil
+
 
 							{% endtrans %}
 						</a>
@@ -37,6 +37,7 @@
 							{% trans %}
 							Séries
 
+
 							{% endtrans %}
 						</a>
 
@@ -46,6 +47,7 @@
 							{% trans %}
 							Films
 
+
 							{% endtrans %}
 						</a>
 
@@ -54,6 +56,7 @@
 						<a class="nav-link" href="#">
 							{% trans %}
 							Ma liste
+
 
 							{% endtrans %}
 						</a>
@@ -67,6 +70,7 @@
 					<button type="submit" class="btn btn-outline-secondary text-light text-center">
 						{% trans %}
 						Rechercher
+
 
 						{% endtrans %}
 					</button>
@@ -83,21 +87,26 @@
 						<!-- Dropdown menu -->
 						<ul class="dropdown-menu dropdown-menu-end notifications-list p-1 dropdown-menu-dark" aria-labelledby="navbarDropdown">
 							{% for notification in app.user.notifications %}
-								{{notification.content |raw}}
+								{{ notification.content |raw }}
 							{% else %}
-								<li>{% trans %}
-									Pas de nouvelle notifications{% endtrans %}
+								<li>
+									{% trans %}
+									Pas de nouvelle notifications
+									{% endtrans %}
 								</li>
 							</a>
 						</li>
 
 					{% endfor %}
-					{% if  app.user.notifications is null %}
+					{% if  app.user.notifications is not empty %}
 						<li>
 							<hr class="dropdown-divider"/>
-							<a class="btn btn-outline-dark text-light" href="{{path('app_notifications_remove')}}">{% trans %}
+							<a class="btn btn-outline-dark text-light" href="{{ path('app_notifications_remove') }}">
+								{% trans %}
 								Tout effacer
-								{% endtrans %}</a>
+
+								{% endtrans %}
+							</a>
 
 						</li>
 					{% endif %}
@@ -117,23 +126,35 @@
 						</span>
 					</li>
 					<li>
-						<a class="dropdown-item" href="{{path('app_profile')}}">
+						<a class="dropdown-item" href="{{ path('app_profile') }}">
 
 							{% trans %}
 							Profil
+
 							{% endtrans %}
 						</a>
 
 					</li>
+
+					<li></li>
+					<div class="dropdown-item">
+						{% if app.request.locale == 'fr' %}
+							<a href="{{ path('switch_language', {'_locale': 'en'}) }}"><img src="{{ asset("assets/pictures/en.png")}}" class="image-lang" alt="image-lang-en"></a>
+						{% else %}
+							<a href="{{ path('switch_language', {'_locale': 'fr'}) }}"><img src="{{ asset("assets/pictures/fr.png")}}" class="image-lang" alt="image-lang-fr"></a>
+						{% endif %}
+					</div>
+
 					<li>
 						<hr class="dropdown-divider"/>
 					</li>
-					{% if is_granted('ROLE_ADMIN')%}
+					{% if is_granted('ROLE_ADMIN') %}
 
 						<li>
 							<a class="dropdown-item" href="/admin">
 								{% trans %}
 								Dashboard
+
 								{% endtrans %}
 							</a>
 
@@ -143,6 +164,7 @@
 						<a class="dropdown-item" href='{{ path('app_logout') }}'>
 							{% trans %}
 							Se Deconnecter
+
 							{% endtrans %}
 						</a>
 					</li>
@@ -150,5 +172,14 @@
 			</li>
 		</ul>
 	</li>
-</ul></div>{% else %}<div class="col-md-3 text-end ">
-<a href='{{path('app_login')}}' class="btn btn-warning">{% trans %}Se Connecter{% endtrans %}</a></div>{% endif %}</div></nav>
+</ul></div>{% else %}<div class="">
+{% if app.request.locale == 'fr' %}
+	<a href="{{ path('switch_language', {'_locale': 'en'}) }}"><img src="{{ asset("assets/pictures/en.png")}}" class="image-lang" alt="image-lang-en"></a>
+{% else %}
+	<a href="{{ path('switch_language', {'_locale': 'fr'}) }}"><img src="{{ asset("assets/pictures/fr.png")}}" class="image-lang" alt="image-lang-fr"></a>
+{% endif %}</div><div class="">
+<a href='{{ path('app_login') }}' class="btn btn-warning">
+	{% trans %}
+	Se Connecter
+	{% endtrans %}
+</a></div>{% endif %}</div></nav>
