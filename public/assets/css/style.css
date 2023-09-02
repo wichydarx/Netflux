@@ -1,58 +1,75 @@
 .nav-link:hover {
-  color: darkgrey !important;
+    color: darkgrey !important;
 }
 
 body {
-  background-color: black !important;
-  color: white !important;
+    background-color: black !important;
+    color: white !important;
 }
 
 section {
-  min-height: 100vh !important;
+    min-height: 100vh !important;
 }
 
 .logo {
-  width: 64px;
+    width: 64px;
 }
 
 /* -------------------------------Style modal single video */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .modal-content {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 40%;
-  margin: 0 auto;
-  background-color: black;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 40%;
+    margin: 0 auto;
+    background-color: black;
 }
 
 .close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 30px;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-  z-index: 2;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+}
+.resize-none {
+    resize: none;
+}
+
+.image-lang {
+    width: 30px !important;
+    height: 30px !important;
 }
 
 /* -------------------------------------------------------*/
 /*media querries maxwith 768*/
 @media (max-width: 768px) {
-  #dropdownContainer {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-  }
+    #dropdownContainer {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+    }
+    .w-md-75 {
+        width: 100% !important;
+    }
+}
+/*media querries minwith 768*/
+@media (min-width: 768px) {
+    .w-md-75 {
+        width: 75% !important;
+    }
 }

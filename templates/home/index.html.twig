@@ -8,12 +8,13 @@
 
 {% endblock %}
 
+
 {% block body %}
 	{% if app.user %}
 		<section>
 			{% for genre in genres %}
 				<div class="title">
-					<h2>{{ genre.name }}</h2>
+					<h2>{{genre.name}}</h2>
 				</div>
 				<div class="carouselSlider">
 					<div class="carouselContainer">

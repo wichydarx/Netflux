@@ -17,13 +17,29 @@
 						<div class="card-body">
 							<h5 class="card-title">{{ video.title }}</h5>
 							<p class="card-text">
-								<small class="text-white">{{ video.category }},</small>
-								<small class="text-white">{{ video.duration }}min</small>
+								<small class="text-white badge text-bg-secondary">{{ video.category }}</small>
+								<small class="text-white badge text-bg-secondary">{{ video.duration }}
+									min</small>
 							</p>
 							<p class="card-text">{{ video.description }}</p>
-							<button class="btn btn-warning mt-1" id="openModalButton">Voir le trailer</button>
+							<hr>
+							<div class="d-flex mb-3 mb-md-2">
+								<div class="mx-2">
+									<small class="text-white badge text-bg-info">{{ totalLikes }}</small>
+									<a class="text-decoration-none text-warning" href="{{ path('app_video_like',{'id': video.id}) }}">
+										<i class="fas fa-thumbs-up"></i>
+									</a>
+								</div>
+								<div class="mx-2">
+									<small class="text-white badge text-bg-info ">{{ totalDislikes }}</small>
+									<a class="text-decoration-none text-danger" href="{{ path('app_video_dislike',{'id': video.id}) }}">
+										<i class="fas fa-thumbs-down"></i>
+									</a>
+								</div>
+							</div>
+							<button class="btn btn-warning mt-1" id="openModalButton">{% trans %}Voir le trailer{% endtrans %}</button>
 							{% if video.category == "film" %}
-								<button class="btn btn-warning mt-1">Voir le film</button>
+								<button class="btn btn-warning mt-1">{% trans %}Voir le film{% endtrans %}</button>
 							{% endif %}
 						</div>
 					</div>
@@ -61,7 +77,7 @@
 
 		<div id="videoModal" class="modal">
 			<div class="modal-content">
-				<video id="player" style="--plyr-color-main: #ffc107" playsinline controls data-poster="/path/to/poster.jpg">
+				<video id="player" style="--plyr-color-main: #ffc107" playsinline controls data-poster="{{ asset('uploads/thumbnail/' ~ video.thumbnail) }}">
 					<source src="{{ asset('uploads/videos/' ~ video.path) }}" type="video/mp4"/>
 					<span class="close">&times;</span>
 					<span id="closeModalButton">
@@ -70,6 +86,95 @@
 				</video>
 			</div>
 		</div>
+		<div class="container mt-5 w-75">
+			<h3 class="text-center">{% trans %}Commentaires
+				{% endtrans %}</h3>
 
-	</section>
-{% endblock %}
+
+			<div class="container mt-5 w-md-75">
+				<h5>{% trans %}Commentaire(s)
+					{% endtrans %}:
+					{{totalComments}}</h5>
+
+				<!-- Display Comments -->
+				<div class="list-group">
+					{% for comment in comments %}
+						<div class="card mb-3 bg-dark text-white">
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h5 class="card-title">
+										{% trans %}Publié par{% endtrans %}:
+										{{ comment.userId.firstname ~ " " ~ comment.userId.lastname }}
+									</h5>
+									<small>
+										{% trans %}Publié le{% endtrans %}:
+										{{ comment.createdAt|date('F d, Y H:i') }}
+										{% if comment.isEdited %}
+											{% trans %}(Modifié){% endtrans %}
+										{% endif %}
+									</small>
+								</div>
+								<!-- Comment content here -->
+								<p>{{ comment.comment }}</p>
+
+							</div>
+							{% if comment.userId is same as app.user %}
+
+
+								<div class="d-flex card-footer justify-content-between">
+
+									<div class="dropup bg-dark w-100 ">
+										<button class="btn btn-secondary dropdown-toggle" type="button" id="editDropdown{{ comment.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+											{% trans %}Editer{% endtrans %}
+										</button>
+										<div class="dropdown-menu dropdown-menu-dark w-100" aria-labelledby="editDropdown{{ comment.id }}">
+											<div class="dropdown-item bg-dark">
+												<form method="POST" action="{{ path('app_video_comment_edit', {'id': comment.id}) }}">
+													<div class="mb-3">
+														<textarea name="editedComment" class="form-control resize-none bg-dark text-light" rows="3">{{ comment.comment }}</textarea>
+
+													</div>
+													<button type="submit" class="btn btn-info">{% trans %}Modifier{% endtrans %}</button>
+												</form>
+											</div>
+										</div>
+									</div>
+									<!-- Delete Button -->
+									<form method="POST" action="{{ path('app_video_comment_delete', {'id': comment.id}) }}">
+										<button type="submit" class="btn btn-danger mt-2">
+											<i class="fas fa-trash    "></i>
+										</button>
+									</form>
+								</div>
+							</div>
+						{% endif %}
+					{% else %}
+						<div class="card mb-3 bg-dark text-white">
+							<div class="card-body">
+								<div class="text-center">
+
+									<p class="card-text">{% trans %}pas de commentaires{% endtrans %}</p>
+
+								</div>
+							</div>
+						</div>
+
+
+					{% endfor %}
+				</div>
+
+				<!-- Comment Form -->
+				<div class="mb-4">
+					<form class="" action="{{ path('app_video_comment', {'id': video.id}) }}" method="post">
+						<div class="form-group mb-3">
+							<label for="comment">{% trans %}Ajouter un commentaire{% endtrans %}:</label>
+							<textarea class="form-control bg-dark text-white resize-none" id="comment" name="comment" rows="3" required></textarea>
+						</div>
+						<button type="submit" class="btn btn-warning">{% trans %}Ajouter{% endtrans %}</button>
+					</form>
+				</div>
+			</div>
+
+
+		</section>
+	{% endblock %}
