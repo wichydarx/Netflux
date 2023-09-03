@@ -56,8 +56,8 @@ Modifier: Edit
 'pas de commentaires': 'no comments'
 'Ajouter un commentaire': 'Add a comment'
 'Le mot de passe et la confirmation doivent être identique': '__Le mot de passe et la confirmation doivent être identique'
-'Mot de passe': Password
-'Confirmez votre mot de passe': 'Confirm your password'
+'Mot de passe': '__Mot de passe'
+'Confirmez votre mot de passe': '__Confirmez votre mot de passe'
 Nom: 'last name'
 Prénom: 'first name'
 "S'inscrire": 'Sign up'
@@ -73,10 +73,4 @@ Bienvenue: Welcome
 (Modifié): (Edited)
 Editer: Edit
 Ajouter: Submit
-"S'identifier": 'Sign In'
-'You are logged in as': 'You are logged in as'
-Logout: __Logout
-'Restez connecté': 'Remember me'
-'Creer son compte': "Don't have an account? Sign Up"
-'Mot de passe oublie?': 'Forgot your password?'
-Valider: Submit
+'Vous pourriez aussi aimer': 'You might also like'

@@ -12,7 +12,28 @@
 {% block body %}
 	{% if app.user %}
 		<section>
+			{% if recommendations is not empty %}
+				<div class="title">
+					<h2>{% trans %}Vous pourriez aussi aimer{% endtrans %}</h2>
+				</div>
+				<div class="carouselSlider">
+					<div class="carouselContainer">
+						<ul>
+							{% for video in recommendations %}
+								<a href="{{path('app_video_detail',{'slug':video.slug, 'id':video.id})}}">
+									<li>
+										<img src="{{asset('uploads/thumbnail/' ~ video.thumbnail)}}" class="thumbnail" alt="">
+										<p>{{video.title}}</p>
+										<p>{{video.category}}</p>
+									</li>
+								</a>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			{% endif %}
 			{% for genre in genres %}
+
 				<div class="title">
 					<h2>{{genre.name}}</h2>
 				</div>

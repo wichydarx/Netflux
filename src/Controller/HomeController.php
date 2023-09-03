@@ -25,14 +25,18 @@ class HomeController extends AbstractController
   #[Route('/', name: 'app_home')]
   public function index(): Response
   {
+    $user = $this->getUser();
 
     $videos = $this->manager->getRepository(Video::class)->findAll();
     $genres = $this->manager->getRepository(Genre::class)->findAll();
+    $recommendations = $this->manager->getRepository(Video::class)->getRecommendations($user);
+
 
     return $this->render('home/index.html.twig', [
       'controller_name' => 'HomeController',
       'videos' => $videos,
-      'genres' => $genres
+      'genres' => $genres,
+      'recommendations' => $recommendations
     ]);
   }
 
