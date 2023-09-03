@@ -37,7 +37,7 @@ class AdminSubscriber implements EventSubscriberInterface
             $subject = "Nouveau film";
         }
 
-    
+        // Construct HTML content outside of the string
         $content = "<li>
             <div class='row'>
                 <div class='col-md'>
@@ -52,7 +52,7 @@ class AdminSubscriber implements EventSubscriberInterface
             </div>
         </li>";
 
-
+        // Send notifications to users
         $users = $this->em->getRepository(User::class)->findAll();
         foreach ($users as $user) {
             $this->notif->sendNotification($subject, $content, $user);
@@ -61,13 +61,13 @@ class AdminSubscriber implements EventSubscriberInterface
 
     private function generateVideoDetailUrl(Video $video): string
     {
-
+        // Generate the URL for video detail page using UrlGeneratorInterface
         return $this->urlGenerator->generate('app_video_detail', ['slug' => $video->getSlug(), 'id' => $video->getId()]);
     }
 
     private function generateThumbnailUrl(Video $video): string
     {
-
+        // Generate the URL for the video's thumbnail image using AssetPackages
         return $this->assetPackages->getUrl('uploads/thumbnail/' . $video->getThumbnail());
     }
 
