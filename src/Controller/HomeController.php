@@ -52,4 +52,26 @@ class HomeController extends AbstractController
 
         return $this->json($videoRepository->findAll(), 200, [], []);
     }
+
+
+    #[Route('/series', name: 'app_series')]
+    public function findBySeries(): Response
+    {
+        $series = $this->manager->getRepository(Video::class)->findBy(['category' => 'serie']);
+
+        return $this->render('home/series.html.twig', [
+          'series' => $series,
+        ]);
+    }
+    
+    #[Route('/films', name: 'app_films')]
+    public function findByFilms(): Response
+    {
+        $films = $this->manager->getRepository(Video::class)->findBy(['category' => 'film']);
+
+        return $this->render('home/films.html.twig', [
+          'films' => $films,
+        ]);
+    }
+
 }

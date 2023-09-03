@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Series
+
+{% endblock %}
+
+{% block body %}
+	{% if app.user %}
+		<section>
+				<div class="title">
+                    <h2>Liste des films</h2>
+				</div>
+				<div class="carouselSlider">
+					<div class="carouselContainer">
+						<ul>
+                            {% for video in films %}
+								<a href="{{path('app_video_detail',{'slug':video.slug, 'id':video.id})}}">
+									<li>
+										<img src="{{asset('uploads/thumbnail/' ~ video.thumbnail)}}" class="thumbnail" alt="">
+										<p>{{video.title}}</p>
+										<p>{{video.category}}</p>
+									</li>
+								</a>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+
+		</section>
+	{% else %}
+		{% include "components/_homeNotLogged.html.twig" %}
+	{% endif %}
+{% endblock %}
+
+
+
+
+
+
