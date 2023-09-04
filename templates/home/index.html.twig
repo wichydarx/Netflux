@@ -41,7 +41,7 @@
 					<div class="carouselContainer">
 						<ul>
 							{% for video in genre.videos %}
-								<a href="{{path('app_video_detail',{'slug':video.slug, 'id':video.id})}}">
+								<a href="{{path('app_video_detail',{'slug':video.slug, 'id':video.id})}}" class="cardHover">
 									<li>
 										<img src="{{asset('uploads/thumbnail/' ~ video.thumbnail)}}" class="thumbnail" alt="">
 										<p>{{video.title}}</p>
