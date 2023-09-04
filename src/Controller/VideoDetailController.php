@@ -69,10 +69,11 @@ class VideoDetailController extends AbstractController
             echo $e->getMessage();
         }
 
-        return $this->redirect($this->generateUrl(
-            'app_video_detail',
-            ['slug' => $video->getSlug(), 'id' => $video->getId()]
-        )
+        return $this->redirect(
+            $this->generateUrl(
+                'app_video_detail',
+                ['slug' => $video->getSlug(), 'id' => $video->getId()]
+            )
         );
     }
 
@@ -106,10 +107,11 @@ class VideoDetailController extends AbstractController
             echo $e->getMessage();
         }
 
-        return $this->redirect($this->generateUrl(
-            'app_video_detail',
-            ['slug' => $video->getSlug(), 'id' => $video->getId()]
-        )
+        return $this->redirect(
+            $this->generateUrl(
+                'app_video_detail',
+                ['slug' => $video->getSlug(), 'id' => $video->getId()]
+            )
         );
     }
 
@@ -125,10 +127,11 @@ class VideoDetailController extends AbstractController
         $comment = $request->request->get('comment');
         if ($comment === null || $comment === '') {
             $this->addFlash('error', $translator->trans('Vous ne pouvez pas envoyer un commentaire vide'));
-            return $this->redirect($this->generateUrl(
-                'app_video_detail',
-                ['slug' => $video->getSlug(), 'id' => $video->getId()]
-            )
+            return $this->redirect(
+                $this->generateUrl(
+                    'app_video_detail',
+                    ['slug' => $video->getSlug(), 'id' => $video->getId()]
+                )
             );
         }
         $review = new Review();
@@ -140,13 +143,14 @@ class VideoDetailController extends AbstractController
         $entityManager->persist($review);
         $entityManager->flush();
 
-        return $this->redirect($this->generateUrl(
-            'app_video_detail',
-            ['slug' => $video->getSlug(), 'id' => $video->getId()]
-        )
+        return $this->redirect(
+            $this->generateUrl(
+                'app_video_detail',
+                ['slug' => $video->getSlug(), 'id' => $video->getId()]
+            )
         );
     }
-    
+
     //comment delete
     #[Route('/video/comment/delete/{id}', name: 'app_video_comment_delete')]
     public function deleteComment($id, EntityManagerInterface $entityManager): Response
@@ -156,10 +160,11 @@ class VideoDetailController extends AbstractController
         $entityManager->remove($review);
         $entityManager->flush();
 
-        return $this->redirect($this->generateUrl(
-            'app_video_detail',
-            ['slug' => $video->getSlug(), 'id' => $video->getId()]
-        )
+        return $this->redirect(
+            $this->generateUrl(
+                'app_video_detail',
+                ['slug' => $video->getSlug(), 'id' => $video->getId()]
+            )
         );
     }
 
@@ -174,11 +179,11 @@ class VideoDetailController extends AbstractController
         $review->setIsEdited(true);
         $entityManager->flush();
 
-        return $this->redirect($this->generateUrl(
-            'app_video_detail',
-            ['slug' => $video->getSlug(), 'id' => $video->getId()]
-        )
+        return $this->redirect(
+            $this->generateUrl(
+                'app_video_detail',
+                ['slug' => $video->getSlug(), 'id' => $video->getId()]
+            )
         );
-
-}
+    }
 }

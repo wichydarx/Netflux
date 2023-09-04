@@ -54,6 +54,27 @@ section {
     width: 30px !important;
     height: 30px !important;
 }
+.accordion-button:not(.collapsed) {
+    color: #fff !important;
+    background-color:#333;
+}
+
+.accordion-button:is(.collapsed) {
+    color: #fff !important;
+    background-color:#333;
+}
+/*accordion body*/
+.accordion-body {
+    background-color: #333;
+    color: white;
+}
+/*accordion header*/
+.accordion-header {
+    background-color: #333;
+    color: white;
+}
+
+
 
 /* -------------------------------------------------------*/
 /*media querries maxwith 768*/
