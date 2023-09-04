@@ -35,13 +35,13 @@ section ul li {
 	object-fit: cover;
 }
 
-.carouselContainer a {
+.cardHover{
 	color: inherit;
 	text-decoration: none;
 	transition: 0.3s;
 }
 
-.carouselContainer a:hover {
+.cardHover:hover {
 	transform: scale(1.1);
 }
 
