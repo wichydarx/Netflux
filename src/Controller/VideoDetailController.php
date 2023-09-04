@@ -181,3 +181,4 @@ class VideoDetailController extends AbstractController
         );
 
 }
+}
