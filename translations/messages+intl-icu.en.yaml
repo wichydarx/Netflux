@@ -75,11 +75,12 @@ Editer: Edit
 Ajouter: Submit
 'Vous pourriez aussi aimer': 'You might also like'
 'Pas de nouvelles notifications': 'No new notifications'
-"S'identifier": "Sign In"
+"S'identifier": 'Sign In'
 'You are logged in as': 'You are logged in as'
 Logout: Logout
 'Restez connecté': 'Remember me'
 'Creer son compte': 'Create an account'
 'Mot de passe oublie?': 'Forgot password?'
 Valider: Submit
-Mot de Passe: Password
+'Mot de Passe': Password
+"Qu'est ce que Netflux ?": "What is Netflux ?"
