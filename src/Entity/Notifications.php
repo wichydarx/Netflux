@@ -24,6 +24,13 @@ class Notifications
     #[ORM\JoinColumn(nullable: false)]
     private ?User $receiver = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createdAt = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime("now", new \DateTimeZone('Europe/Paris'));
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +68,18 @@ class Notifications
     public function setReceiver(?User $receiver): static
     {
         $this->receiver = $receiver;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

@@ -32,6 +32,9 @@ class Review
     #[ORM\Column(nullable: true)]
     private ?int $dislike = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isEdited = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Review
     public function setDislike(?int $dislike): static
     {
         $this->dislike = $dislike;
+
+        return $this;
+    }
+
+    public function isIsEdited(): ?bool
+    {
+        return $this->isEdited;
+    }
+
+    public function setIsEdited(?bool $isEdited): static
+    {
+        $this->isEdited = $isEdited;
 
         return $this;
     }

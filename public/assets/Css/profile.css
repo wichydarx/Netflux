@@ -28,12 +28,12 @@
     color: white;
   }
 
-  .card-body {
+  .card-body-p {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .card-body img {
+  .card-body-p img {
     width: 200px;
   }

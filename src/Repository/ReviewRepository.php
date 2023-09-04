@@ -21,28 +21,64 @@ class ReviewRepository extends ServiceEntityRepository
         parent::__construct($registry, Review::class);
     }
 
-//    /**
-//     * @return Review[] Returns an array of Review objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Review[] Returns an array of Review objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('r')
+    //            ->andWhere('r.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('r.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Review
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Review
+    //    {
+    //        return $this->createQueryBuilder('r')
+    //            ->andWhere('r.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    //find comments by video id
+    public function findCommentsByVideoId($value): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.video_id = :val')
+            ->andWhere('r.comment IS NOT NULL')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult();
+    }
+
+    //number of comments by video id
+    public function countCommentsByVideoId($value): int
+    {
+        return $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->andWhere('r.video_id = :val')
+            ->andWhere('r.comment IS NOT NULL')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    //remove comment by id and user id if user is the owner of the comment or admin and comment is not null
+    public function findUserComment($id, $user_id)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.id = :id')
+            ->andWhere('r.user_id = :user_id')
+            ->andWhere('r.comment IS NOT NULL')
+            ->setParameter('id', $id)
+            ->setParameter('user_id', $user_id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

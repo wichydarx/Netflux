@@ -6,6 +6,7 @@ namespace App\Service;
 use Mailjet\Client;
 use App\Entity\User;
 use Mailjet\Resources;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 class MailJet
@@ -15,7 +16,7 @@ class MailJet
 
     private $mailJet;
 
-    public function __construct(string $mailJetApiKey, string $mailJetApiKeyPrivate)
+    public function __construct(string $mailJetApiKey, string $mailJetApiKeyPrivate, private TranslatorInterface $translator)
     {
         $this->apiKey = $mailJetApiKey;
         $this->apiSecret = $mailJetApiKeyPrivate;
@@ -29,7 +30,7 @@ class MailJet
                 [
                     'From' => [
                         'Email' => "snoopjamescurtis@gmail.com",
-                        'Name' => "Netflux Reinitalisation de mot de passe"
+                        'Name' => $this->translator->trans("Netflux Reinitalisation de mot de passe")
                     ],
                     'To' => [
                         [
@@ -39,7 +40,7 @@ class MailJet
                     ],
                     'TemplateID' => 5052962,
                     'TemplateLanguage' => true,
-                    'Subject' => 'Reinitialisation de mot de passe',
+                    'Subject' => $this->translator->trans('Reinitialisation de mot de passe'),
                     'Variables' => [
                         'subject' => $subject,
                         'link' => $message,
