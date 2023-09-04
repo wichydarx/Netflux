@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{% trans %}Modifier Profil{% endtrans %}
+{% endblock %}
+
+{% block body %}
+	<div class="form-container-r">
+		<div class="background-image"></div>
+		<div class="form-wrapper-r">
+			<h1 class="card-title mb-5">{% trans %}Modifier mes informations{% endtrans %}</h1>
+
+			{{ form_start(form) }}
+
+			{{ form_row(form.firstname)  }}
+			{{ form_row(form.lastname) }}
+			{{ form_row(form.email, {'label': 'Email'}) }}
+			{{ form_row(form.avatar , {'label': 'Avatar'}) }}
+			<div class="d-grid gap-2">
+				{{ form_widget(form.submit, { 'attr': {'class': 'btn btn-warning mt-3'} }) }}
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+</div></div></div>{% endblock %}

@@ -1,5 +1,7 @@
 
 ###> symfony/framework-bundle ###
+/public/uploads/
+/.env
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -7,6 +9,7 @@
 /public/bundles/
 /var/
 /vendor/
+/DEVSENSE/
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###

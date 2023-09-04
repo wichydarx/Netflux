@@ -2,15 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\VideoRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Interface\VideoInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VideoRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
-class Video
+class Video implements VideoInterface
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,17 +37,25 @@ class Video
     #[ORM\OneToMany(mappedBy: 'video', targetEntity: Episode::class)]
     private Collection $episodes;
 
-    #[ORM\ManyToOne(inversedBy: 'video')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Genre $genre = null;
+
 
     #[ORM\OneToMany(mappedBy: 'video_id', targetEntity: Review::class)]
     private Collection $reviews;
+
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'videos')]
+    private Collection $genre;
+
+    #[ORM\Column(length: 255)]
+    private ?string $thumbnail = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->genre = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -142,17 +153,7 @@ class Video
         return $this;
     }
 
-    public function getGenre(): ?Genre
-    {
-        return $this->genre;
-    }
 
-    public function setGenre(?Genre $genre): static
-    {
-        $this->genre = $genre;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Review>
@@ -183,4 +184,59 @@ class Video
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Genre>
+     */
+    public function getGenre(): Collection
+    {
+        return $this->genre;
+    }
+
+    public function addGenre(Genre $genre): static
+    {
+        if (!$this->genre->contains($genre)) {
+            $this->genre->add($genre);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): static
+    {
+        $this->genre->removeElement($genre);
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(string $thumbnail): static
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+        public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+
 }

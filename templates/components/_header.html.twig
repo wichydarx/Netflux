@@ -1,0 +1,186 @@
+<nav
+	class="navbar navbar-expand-lg  navbar-dark bg-black">
+	<!-- Container wrapper -->
+	<div
+		class="container-fluid">
+		<!-- Navbar brand -->
+		<a class="navbar-brand" href="{{ path('app_home') }}">
+
+			<img src="{{ asset('assets/pictures/NETFLUX_64.png') }}" alt="logo_netflux" loading="lazy"/>
+
+		</a>
+
+		<!-- Toggle button -->
+		{% if app.user %}
+			<button class="navbar-toggler mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<i class="fas fa-bars"></i>
+			</button>
+
+			<div
+				class="collapse navbar-collapse" id="navbarSupportedContent">
+				<!-- Left links -->
+				<ul class="navbar-nav d-flex align-items-center justify-content-center me-auto mb-2 mb-lg-0">
+
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">
+
+							{% trans %}
+							Accueil
+
+
+							{% endtrans %}
+						</a>
+
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_series') }}">
+							{% trans %}
+							Séries
+
+
+							{% endtrans %}
+						</a>
+
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_films') }}">
+							{% trans %}
+							Films
+
+
+							{% endtrans %}
+						</a>
+
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							{% trans %}
+							Ma liste
+
+
+							{% endtrans %}
+						</a>
+					</li>
+				</ul>
+				<!-- Left links -->
+
+				<!-- Search form -->
+				<form class="input-group w-auto mt-md-3" method="POST" action="{{ path('app_search') }}">
+					<input type="search" class="form-control form-control-dark w-50" name="search" placeholder="{% trans %}Rechercher...{% endtrans %}" aria-label="Search">
+					<button type="submit" class="btn btn-outline-secondary text-light text-center">
+						{% trans %}
+						Rechercher
+
+
+						{% endtrans %}
+					</button>
+				</form>
+
+				<ul
+					class="navbar-nav mb-2 mb-lg-0 mx-3 justify-content-between" id='dropdownContainer'>
+
+					<!-- Navbar dropdown -->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle position-relative hidden-arrow" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fas fa-bell"></i>
+							{% if  app.user.notifications is not empty %}
+								<span class="position-absolute top-0 start-50 badge rounded-pill translate-middle bg-danger border border-light rounded-circle">
+									<span>{{app.user.notifications | length}}</span>
+								</span>
+							{% endif %}
+
+						</a>
+						<!-- Dropdown menu -->
+						<ul class="dropdown-menu dropdown-menu-end notifications-list p-1 dropdown-menu-dark" aria-labelledby="navbarDropdown">
+							{% for notification in app.user.notifications %}
+								{{ notification.content |raw }}
+							{% else %}
+								<li>
+									{% trans %}
+									Pas de nouvelles notifications
+									{% endtrans %}
+								</li>
+							</a>
+						</li>
+
+					{% endfor %}
+					{% if  app.user.notifications is not empty %}
+						<li>
+							<hr class="dropdown-divider"/>
+							<a class="btn btn-outline-dark text-light" href="{{ path('app_notifications_remove') }}">
+								{% trans %}
+								Tout effacer
+
+								{% endtrans %}
+							</a>
+
+						</li>
+					{% endif %}
+				</li>
+			</ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<img src="{{ asset("/uploads/avatar/" ~ (app.user.avatar ? app.user.avatar :"avatar_default.png")) }}" class="rounded-circle img-fluid" height="25" width="25" alt="user avatar"></a>
+			<!-- Dropdown menu -->
+			<ul class="dropdown-menu dropdown-menu-end p-1 dropdown-menu-dark" aria-labelledby="navbarDropdown">
+
+				<li class="my-2 d-flex flex-column align-items-center justify-content-between">
+					<img src="{{ asset("/uploads/avatar/" ~ (app.user.avatar ? app.user.avatar :"avatar_default.png")) }}" class="rounded-circle img-fluid" height="25" width="25" alt="user avatar">
+
+					<span>
+						{{ app.user.lastname ~ " " ~ app.user.firstname }}
+					</span>
+				</li>
+				<li>
+					<a class="dropdown-item" href="{{ path('app_profile') }}">
+
+						{% trans %}
+						Profil
+
+						{% endtrans %}
+					</a>
+
+				</li>
+
+				<li></li>
+				<div class="dropdown-item">
+					{% if app.request.locale == 'fr' %}
+						<a href="{{ path('switch_language', {'_locale': 'en'}) }}"><img src="{{ asset("assets/pictures/en.png")}}" class="image-lang" alt="image-lang-en"></a>
+					{% else %}
+						<a href="{{ path('switch_language', {'_locale': 'fr'}) }}"><img src="{{ asset("assets/pictures/fr.png")}}" class="image-lang" alt="image-lang-fr"></a>
+					{% endif %}
+				</div>
+
+				<li>
+					<hr class="dropdown-divider"/>
+				</li>
+				{% if is_granted('ROLE_ADMIN') %}
+
+					<li>
+						<a class="dropdown-item" href="/admin">
+							{% trans %}
+							Dashboard
+
+							{% endtrans %}
+						</a>
+
+					</li>
+				{% endif %}
+				<li>
+					<a class="dropdown-item" href='{{ path('app_logout') }}'>
+						{% trans %}
+						Se Deconnecter
+
+						{% endtrans %}
+					</a>
+				</li>
+			</li>
+		</li>
+	</ul>
+</li></ul></div>{% else %}<div class="">{% if app.request.locale == 'fr' %}
+<a href="{{ path('switch_language', {'_locale': 'en'}) }}"><img src="{{ asset("assets/pictures/en.png")}}" class="image-lang" alt="image-lang-en"></a>{% else %}
+<a href="{{ path('switch_language', {'_locale': 'fr'}) }}"><img src="{{ asset("assets/pictures/fr.png")}}" class="image-lang" alt="image-lang-fr"></a>{% endif %}</div><div class=""><a href='{{ path('app_login') }}' class="btn btn-warning">
+{% trans %}
+Se Connecter
+{% endtrans %}</a></div>{% endif %}</div></nav>

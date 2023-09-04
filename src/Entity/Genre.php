@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\GenreRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Video;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\GenreRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: GenreRepository::class)]
 class Genre
@@ -18,15 +20,12 @@ class Genre
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $description = null;
-
-    #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Video::class)]
-    private Collection $video;
+    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'genre')]
+    private Collection $videos;
 
     public function __construct()
     {
-        $this->video = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,31 +45,19 @@ class Genre
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Video>
      */
-    public function getVideo(): Collection
+    public function getVideos(): Collection
     {
-        return $this->video;
+        return $this->videos;
     }
 
     public function addVideo(Video $video): static
     {
-        if (!$this->video->contains($video)) {
-            $this->video->add($video);
-            $video->setGenre($this);
+        if (!$this->videos->contains($video)) {
+            $this->videos->add($video);
+            $video->addGenre($this);
         }
 
         return $this;
@@ -78,13 +65,15 @@ class Genre
 
     public function removeVideo(Video $video): static
     {
-        if ($this->video->removeElement($video)) {
-            // set the owning side to null (unless already changed)
-            if ($video->getGenre() === $this) {
-                $video->setGenre(null);
-            }
+        if ($this->videos->removeElement($video)) {
+            $video->removeGenre($this);
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

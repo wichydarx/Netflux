@@ -1,0 +1,67 @@
+<div class="container-fluid">
+	<header class="d-flex flex-wrap  align-items-center {{app.user ? " " : " flex-column flex-md-row"}} justify-content-center justify-content-md-between  py-3 mb-4">
+
+		<div class="col-md-3 mb-2 mb-md-0 logo">
+			<a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+				<img src="{{asset('assets/pictures/NETFLUX_64.png')}}"  alt="logo_netflux">
+			</a>
+		</div>
+		 {# <a href="{{path('app_locale_switch', {_locale: 'en'})}}" class="d-inline-flex link-body-emphasis text-decoration-none text-white">change language</a> #}
+		
+
+		{% if app.user %}
+			<ul id="enhaut" class="nav col-12 col-md-auto mb-2 align-items-center mb-md-0">
+				<li>
+					<a href="{{path('app_home')}}" class="nav-link px-2 text-light">{% trans %}Accueil{% endtrans %}</a>
+				</li>
+				<li>
+					<a href="#" class="nav-link px-2 text-light">{% trans %}Séries{% endtrans %}</a>
+				</li>
+
+				<li>
+					<a href="#" class="nav-link px-2 text-light">{% trans %}Films{% endtrans %}</a>
+
+				</li>
+				<li>
+					<a href="#" class="nav-link px-2 text-light">{% trans %}Ma liste{% endtrans %}</a>
+
+				</li>
+			</ul>
+
+
+			<form class="col-12 col-md-auto d-flex flex-column flex-md-row align-items-center justify-content-center mt-md-3" method="POST" action="{{path('app_search')}}">
+				<input type="search" class="form-control form-control-dark w-50" name="search" placeholder="{% trans %}Rechercher...{% endtrans %}" aria-label="Search">
+				<button type="submit" class="btn btn-outline-secondary mx-2 text-light text-center">{% trans %}Rechercher{% endtrans %}</button>
+			</form>
+
+
+			<div class="btn-group mx-2">
+				<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fa-solid fa-user"></i>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-dark">
+					<li>
+						<a class="dropdown-item " href="{{path('app_profile')}}">{% trans %}Profil{% endtrans %}</a>
+
+					</li>
+					{% if is_granted('ROLE_ADMIN') %}
+						<li>
+							<a class="dropdown-item " href="{{path('admin')}}">{% trans %}Panel Admin{% endtrans %}</a>
+
+						</li>
+					{% endif %}
+
+					<li><hr class="dropdown-divider"></li>
+					<li>
+						<a class="dropdown-item" href='{{path('app_logout')}}'>{% trans %}Se Déconnecter{% endtrans %}</a>
+					</li>
+				</ul>
+			</div>
+		{% else %}
+
+			<div class="col-md-3 text-end ">
+				<a href='{{path('app_login')}}' class="btn btn-warning">{% trans %}Se Connecter{% endtrans %}</a>
+			</div>
+		{% endif %}
+	</header>
+</div>

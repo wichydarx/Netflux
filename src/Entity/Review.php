@@ -29,6 +29,12 @@ class Review
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $dislike = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isEdited = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +96,30 @@ class Review
     public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getDislike(): ?int
+    {
+        return $this->dislike;
+    }
+
+    public function setDislike(?int $dislike): static
+    {
+        $this->dislike = $dislike;
+
+        return $this;
+    }
+
+    public function isIsEdited(): ?bool
+    {
+        return $this->isEdited;
+    }
+
+    public function setIsEdited(?bool $isEdited): static
+    {
+        $this->isEdited = $isEdited;
 
         return $this;
     }

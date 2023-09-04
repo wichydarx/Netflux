@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Series	{% endblock %}
+
+{% block body %}
+<section>
+		<div class="d-flex">
+			{% for video in series %}
+
+				<a href="{{path('app_video_detail',{'slug':video.slug, 'id':video.id})}}" class="cardHover text-decoration-none">
+					<div class="card bg-transparent text-light ms-4" style="width: 18rem;">
+						<img class="card-img-top" src="{{asset('uploads/thumbnail/' ~ video.thumbnail)}}" alt="Card image cap">
+						<div class="card-body d-flex justify-content-center">
+							<p class="card-text">{{video.title}}</p>
+						</div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}
+
+
+
+
+

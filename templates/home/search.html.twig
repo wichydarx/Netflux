@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	{{title}}
+	| NETFLUX
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<div class="row">
+
+			{% for video in videos %}
+				<div class="col-md-3">
+					<div class=" border-dark">
+						<div class="card-header mx-2">
+							<a href='{{path('app_video_detail',{'slug':video.slug, 'id':video.id})}}'>
+								<img src="{{asset('uploads/thumbnail/'~ video.thumbnail)}}" class="img-fluid " alt="{{video.title}}">
+							</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	{% endblock %}
