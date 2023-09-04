@@ -5,20 +5,24 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class ResetPasswordType extends AbstractType
 {
+    public function __construct(
+        private TranslatorInterface $translator)
+    {}
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('password',RepeatedType::class,[
                 'type' => PasswordType::class,
-                'invalid_message' => 'Les mots de passe doivent être identiques',
+                'invalid_message' => $this->translator->trans('Les mots de passe doivent être identiques'),
                 'required' => true,
-                'first_options' => ['label' => 'Nouveau mot de passe'],
-                'second_options' => ['label' => 'Confirmez votre nouveau mot de passe']
+                'first_options' => ['label' => $this->translator->trans('Nouveau mot de passe')],
+                'second_options' => ['label' => $this->translator->trans('Confirmez votre nouveau mot de passe')]
             ])
         ;
     }
