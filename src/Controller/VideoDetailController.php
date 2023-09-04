@@ -19,6 +19,7 @@ class VideoDetailController extends AbstractController
     {
 
         $video = $manager->getRepository(Video::class)->find($id);
+        $review = $manager->getRepository(Review::class)->find($id);
         $episodes = $manager->getRepository(Episode::class)->findBy(['video' => $video]);
         $totalLikes = $manager->getRepository(Review::class)->count(['video_id' => $id, 'thumbsUp' => 1]);
         $totalDislikes = $manager->getRepository(Review::class)->count(['video_id' => $id, 'dislike' => 1]);
@@ -26,9 +27,11 @@ class VideoDetailController extends AbstractController
         $comments = $manager->getRepository(Review::class)->findCommentsByVideoId($id);
 
 
+
         return $this->render('video_detail/index.html.twig', [
             'video' => $video,
             'episodes' => $episodes,
+
             'totalLikes' => $totalLikes,
             'totalDislikes' => $totalDislikes,
             'totalComments' => $totalComments,
@@ -176,5 +179,5 @@ class VideoDetailController extends AbstractController
             ['slug' => $video->getSlug(), 'id' => $video->getId()]
         )
         );
-    }
+
 }
