@@ -39,7 +39,7 @@
 				{% endif %}
 				<label for="inputEmail">Email</label>
 				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-				<label for="inputPassword">Mot de Passe</label>
+				<label for="inputPassword">{% trans %}Mot de Passe{% endtrans %}</label>
 				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 				<div class="d-grid gap-2">
