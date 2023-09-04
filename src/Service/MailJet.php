@@ -29,7 +29,7 @@ class MailJet
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => "snoopjamescurtis@gmail.com",
+                        'Email' => "smarina.veng@gmail.com",
                         'Name' => $this->translator->trans("Netflux Reinitalisation de mot de passe")
                     ],
                     'To' => [
@@ -38,7 +38,7 @@ class MailJet
                             'Name' => $user->getFirstname() . ' ' . $user->getLastname()
                         ]
                     ],
-                    'TemplateID' => 5052962,
+                    'TemplateID' => 5064455,
                     'TemplateLanguage' => true,
                     'Subject' => $this->translator->trans('Reinitialisation de mot de passe'),
                     'Variables' => [

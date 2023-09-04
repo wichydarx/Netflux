@@ -4,7 +4,7 @@
 
 {% block body %}
 <section>
-		<div class="d-flex">
+		<div class="d-flex flex-wrap">
 			{% for video in films %}
 				<a href="{{path('app_video_detail',{'slug':video.slug, 'id':video.id})}}" class="cardHover text-decoration-none">
 					<div class="card bg-transparent text-light ms-4" style="width: 18rem;">
